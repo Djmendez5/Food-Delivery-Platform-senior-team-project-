@@ -9,8 +9,9 @@ class PersonInput extends Component {
     firstname: "",
     lastname: "",
     username: "",
+    phone:"",
     password: "",
-    email: ""
+    email: "",
   };
 
   handleSubmit = event => {
@@ -19,14 +20,32 @@ class PersonInput extends Component {
     const user = {
       firstname: "",
       lastname: "",
-      username: "",
+      username:"",
+      phone: "",
       password: "",
+      address:"",
       email: ""
+      
     };
 
     console.log(user);
 
+    axios
+      .put("http://localhost:7000/editprofile", {
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        username: this.state.username,
+        phone:this.state.phone,
+        password: this.state.password,
+        address:this.state.address,
+        email: this.state.email
+      })
+      .then(res => {
+        // name: res.data;
+        console.log(res.data);
+      });
   };
+
 
   render() {
     return (
@@ -54,11 +73,39 @@ class PersonInput extends Component {
           />
           <br />
           <TextField
+            type="username"
+            hintText="Enter your username"
+            floatingLabelText="username"
+            onChange={e => {
+              this.setState({ username: e.target.value });
+            }}
+          />
+          <br />
+          <TextField
+            type="phone"
+            hintText="Enter your phone number"
+            floatingLabelText="phone"
+            onChange={e => {
+              this.setState({ phone: e.target.value });
+            }}
+          />
+          <br />
+          <TextField
             type="password"
             hintText="Enter your Password"
             floatingLabelText="Password"
             onChange={e => {
               this.setState({ password: e.target.value });
+            }}
+            
+          />
+          <br />
+          <TextField
+            type="address"
+            hintText="Enter your address"
+            floatingLabelText="address"
+            onChange={e => {
+              this.setState({ address: e.target.value });
             }}
           />
           <br />
