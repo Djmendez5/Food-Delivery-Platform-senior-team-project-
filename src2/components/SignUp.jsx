@@ -8,9 +8,10 @@ class PersonInput extends Component {
   state = {
     firstname: "",
     lastname: "",
+    username: "",
     password: "",
     email: "",
-    number: ""
+    phone: ""
   };
 
   handleSubmit = event => {
@@ -19,9 +20,10 @@ class PersonInput extends Component {
     const user = {
       firstname: "",
       lastname: "",
+      username:"",
       password: "",
       email: "",
-      number: ""
+      phone: ""
     };
 
     console.log(user);
@@ -31,6 +33,7 @@ class PersonInput extends Component {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         username: this.state.username,
+        phone:this.state.phone,
         password: this.state.password,
         email: this.state.email
       })
@@ -91,11 +94,11 @@ class PersonInput extends Component {
             }}
           />
           <TextField
-            type="number"
+            type="phone"
             hintText="Enter your Phone number"
             floatingLabelText="Phone number"
             onChange={e => {
-              this.setState({ number: e.target.value });
+              this.setState({ phone: e.target.value });
             }}
           />
           <br />

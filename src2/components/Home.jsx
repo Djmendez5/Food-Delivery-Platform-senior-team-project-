@@ -15,6 +15,7 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Profile from './Profile'
 import AddMenuItem from './AddMenuItem.jsx'
+import DisplayMenu from './DisplayMenu'
 import { Column, Row } from 'simple-flexbox';
  
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/profile" component={goProfile} />
         <Route path="/addmenuitem" component={addMenu}/>
+        <Route path="/displaymenu" component={displayMenu}/>
 
         
         <AuthButton />
@@ -53,6 +55,11 @@ return (
   <AddMenuItem/>
 );
 }
+function displayMenu({ match }){
+  return (
+    <DisplayMenu/>
+  );
+  }
 
 function Topics({ match }) {
     return (
@@ -232,6 +239,9 @@ function Header() {
           </Column>
           <Column flexGrow={0.1} horizontal='space-between'>
           <Link to="/addmenuitem" style ={styles.addmenuButton}>Add Menu Item</Link>
+          </Column>
+          <Column flexGrow={0.1} horizontal='space-between'>
+          <Link to="/displaymenu" style ={styles.addmenuButton}>Show menu!</Link>
           </Column>
         </Row>
       </Column>

@@ -35,6 +35,7 @@ class Menuitem extends Component {
         owner: this.state.email
       })
       .then(res => {
+          //console.log("asdsadsa")
         // name: res.data;
         console.log(res.data);
       });
