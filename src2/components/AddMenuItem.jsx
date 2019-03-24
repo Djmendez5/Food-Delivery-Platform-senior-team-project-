@@ -32,7 +32,7 @@ class Menuitem extends Component {
         description: this.state.description,
         nutrition_info: this.state.nutrition_info,
         price:parseInt(this.state.price),
-        owner: this.state.email
+        owner: this.state.owner
       })
       .then(res => {
           //console.log("asdsadsa")

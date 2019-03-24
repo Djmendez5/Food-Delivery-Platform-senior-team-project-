@@ -12,7 +12,22 @@ class PersonInput extends Component {
     phone:"",
     password: "",
     email: "",
+    location: null
   };
+
+  componentDidMount() {
+
+
+
+
+
+
+
+  axios.post("http://localhost:7000/getUserLocation")
+      .then(response => this.setState({location:response.data}))
+      //.then(response => {console.log("dsad",response.data)})
+      .catch(err => console.log('error', err))
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -28,7 +43,7 @@ class PersonInput extends Component {
       
     };
 
-    console.log(user);
+    console.log(this.state.location);
 
     axios
       .put("http://localhost:7000/editprofile", {
@@ -48,6 +63,7 @@ class PersonInput extends Component {
 
 
   render() {
+  console.log(this.state.location);
     return (
       <div style={styles.placeCenter}> 
         <MuiThemeProvider onSubmit={this.handleSubmit}>
