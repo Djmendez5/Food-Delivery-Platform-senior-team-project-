@@ -19,6 +19,8 @@
  import DisplayMenu from './DisplayMenu'
  import AddRestaurant from './AddRestaurant'
  import ListRestaurants from './ListRestaurants'
+ import AddOrder from './AddOrder'
+ import OrderHistory from './OrderHistory'
   
  function App() {
    return (
@@ -33,6 +35,8 @@
          <Route path="/displaymenu" component={displayMenu}/>
          <Route path="/addrestaurant" component={AddRestaurant}/>
          <Route path="/listrestaurants" component={ListRestaurants}/>
+         <Route path="/addorder" component={AddOrder}/>
+         <Route path="/orderhistory" component={OrderHistory}/>
          {/* <AuthButton /> */}
        </div>
      </Router>
@@ -63,6 +67,16 @@
      <AddMenuItem/>
    );
    }
+   function addOrder({ match }){
+    return (
+      <AddOrder/>
+    );
+    }
+    function orderhistory({match}){
+      return(
+        <OrderHistory/>
+      );
+    }
  
  function displayMenu({ match }) {
    return (
@@ -189,6 +203,12 @@ styles.listrestaurantsButton = {
            </Column>
            <Column flexGrow={0.1} horizontal='space-between'>
            <Link to="/listrestaurants" style ={styles.listrestaurantsButton}>Find restaurants</Link>
+           </Column>
+           <Column flexGrow={0.1} horizontal='space-between'>
+           <Link to="/addorder" style ={styles.listrestaurantsButton}>Add orders</Link>
+           </Column>
+           <Column flexGrow={0.1} horizontal='space-between'>
+           <Link to="/orderhistory" style ={styles.listrestaurantsButton}>Order History</Link>
            </Column>
          </Row>
        </Column>
