@@ -21,6 +21,8 @@
  import ListRestaurants from './ListRestaurants'
  import AddOrder from './AddOrder'
  import OrderHistory from './OrderHistory'
+ import Chip from '@material-ui/core/Chip';
+
   
  function App() {
    return (
@@ -52,7 +54,7 @@
  function Home() {
    console.log("Hello");
    return (
-     <h2 className="food-Image" style={styles.welcome}>Welcome to YeetFood</h2>
+     <h2 className="food-Image" style={styles.welcome}>Welcome to RunningFood</h2>
    );
  }
  
@@ -100,114 +102,109 @@
      );
  }
  
- const styles = {};
- 
- // paddingTop: "50px",
- 
- styles.mainButton = {
-     // position: "absolute",
-     fontSize: "50px",
-     color: "red"
- }
- 
- styles.homeButton = {
-     position: "absolute",
-     left: "20%",
-     fontSize: "20px",
-     color: "green",
-     paddingTop: "25px"
- }
- 
- styles.loginButton = {
-     // position: "absolute",
-     // left: "25%",
-     fontSize: "20px",
-     color: "green",
-     // paddingTop: "25px",
- }
- 
- styles.signupButton = {
-     // position: "absolute",
-     // left: "30%",
-     fontSize: "20px",
-     color: "green",
-     // paddingTop: "1px"
- }
-  
- styles.welcome = {
-   paddingTop: "50px"
- }
- 
- styles.placeCenter = {
-   position: "absolute",
-   left: "40%",
-   paddingTop: "150px"
- }
- 
- styles.profileButton = {
-   // position: "absolute",
-   // left: "36%",
-   fontSize: "20px",
-   color: "green",
-   // paddingTop: "1px"
- }
- styles.addmenuButton = {
+const styles = {};
+
+styles.mainButton = {
   // position: "absolute",
-  // left: "36%",
+  fontSize: "50px",
+  color: "red",
+  attachment: "fixed",
+  backgroundColor: 'orange',
+  fontWeight: 'bold'
+}
+
+styles.loginButton = {
+  // position: "absolute",
+  // left: "25%",
+  fontSize: "20px",
+  color: "red",
+  padding: 40,
+  fontWeight: 'bold'
+}
+
+styles.signupButton = {
+  // position: "absolute",
+  fontSize: "20px",
+  color: "red",
+  padding: 40,
+  fontWeight: 'bold'
+}
+
+styles.welcome = {
+  paddingTop: "50px"
+}
+
+styles.placeCenter = {
+  position: "absolute",
+  left: "40%",
+  paddingTop: "150px"
+}
+
+styles.profileButton = {
+  // position: "absolute",
   fontSize: "20px",
   color: "green",
-  // paddingTop: "1px"
+}
+styles.addmenuButton = {
+  // position: "absolute",
+  fontSize: "20px",
+  color: "green",
 }
 styles.addrestaurantButton = {
   // position: "absolute",
-  // left: "36%",
   fontSize: "20px",
   color: "green",
-  // paddingTop: "1px"
 }
 styles.listrestaurantsButton = {
   // position: "absolute",
-  // left: "36%",
   fontSize: "20px",
   color: "green",
-  // paddingTop: "1px"
 }
  function Header() {
    return (
      <ul>
-       <Column flexGrow={1}>
-         <Row>
-           <Link to="/" >
-             <button className="btn" style={styles.mainButton}
-             > YeetFood </button>
+       <Column flexGrow={0}>
+         <Row horizontal='center' alignSelf='center'>
+           <Link to="/" className="btn">
+             <button className="btn" style={styles.mainButton}> 
+                RunningFood 
+             </button>
            </Link>
-         </Row>
-         <Row horizontal='start'>
-           <Column flexGrow={0.1}>
-             <Link to="/login" style={styles.loginButton}>Login</Link>
+           <Column flexGrow={0}>
+             <Link to="/login" style={styles.loginButton}>
+                Login
+             </Link>
            </Column>
-           <Column flexGrow={0.1}>
+           <Column flexGrow={0}>
              <Link to="/signup" style={styles.signupButton}>Sign Up</Link>
            </Column>
-           <Column flexGrow={0.1}>
+         </Row>
+         <Row horizontal='start'>
+           {/* <Column flexGrow={0.05}>
+             <Link to="/login" style={styles.loginButton}>Login</Link>
+           </Column>
+           <Column flexGrow={0.05}>
+             <Link to="/signup" style={styles.signupButton}>Sign Up</Link>
+           </Column> */}
+           <Column flexGrow={0.05}>
              <Link to="/profile" style={styles.profileButton}>Profile</Link>
            </Column>
-           <Column flexGrow={0.1} horizontal='space-between'>
+           <Column flexGrow={0.05} horizontal='space-between'>
            <Link to="/addmenuitem" style ={styles.addmenuButton}>Add Menu Item</Link>
            </Column>
-           <Column flexGrow={0.1} horizontal='space-between'>
-           <Link to="/displaymenu" style ={styles.addmenuButton}>Show menu!</Link>
+           <Column flexGrow={0.05} horizontal='space-between'>
+           <Link to="/displaymenu" style ={styles.addmenuButton}>Show menu</Link>
            </Column>
-           <Column flexGrow={0.1} horizontal='space-between'>
+           <Column flexGrow={0.05} horizontal='space-between'>
            <Link to="/addrestaurant" style ={styles.addrestaurantButton}>Add restaurant</Link>
            </Column>
-           <Column flexGrow={0.1} horizontal='space-between'>
+           <Column flexGrow={0.05} horizontal='space-between'>
            <Link to="/listrestaurants" style ={styles.listrestaurantsButton}>Find restaurants</Link>
            </Column>
-           <Column flexGrow={0.1} horizontal='space-between'>
+           <Column flexGrow={0.05} horizontal='space-between'>
            <Link to="/addorder" style ={styles.listrestaurantsButton}>Add orders</Link>
            </Column>
-           <Column flexGrow={0.1} horizontal='space-between'>
+           <Column flexGrow={0.05} horizontal='space-between'>
            <Link to="/orderhistory" style ={styles.listrestaurantsButton}>Order History</Link>
            </Column>
          </Row>
