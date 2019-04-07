@@ -21,7 +21,7 @@
  import ListRestaurants from './ListRestaurants'
  import AddOrder from './AddOrder'
  import OrderHistory from './OrderHistory'
- import Chip from '@material-ui/core/Chip';
+//  import Chip from '@material-ui/core/Chip';
 
   
  function App() {
@@ -54,7 +54,23 @@
  function Home() {
    console.log("Hello");
    return (
-     <h2 className="food-Image" style={styles.welcome}>Welcome to RunningFood</h2>
+     <MuiThemeProvider>
+       <Row horizontal='center'>
+       <h2 className="food-Image" style={styles.welcome}>
+       Find Restaurant     
+       <TextField
+            type="location"
+            // hintText="Address"
+            // floatingLabelText="Find Restaurant"
+            // onChange={(event, newValue) =>
+            //   this.setState({ username: newValue })
+            // }
+            
+            variant="outlined"
+        />
+       </h2>
+       </Row>
+     </MuiThemeProvider>
    );
  }
  
@@ -110,28 +126,32 @@ styles.mainButton = {
   color: "red",
   attachment: "fixed",
   backgroundColor: 'orange',
-  fontWeight: 'bold'
+  fontWeight: 'bold',
+  border: 'transparent',
 }
 
 styles.loginButton = {
-  // position: "absolute",
-  // left: "25%",
+  position: "absolute",
+  right: "25%",
   fontSize: "20px",
   color: "red",
-  padding: 40,
-  fontWeight: 'bold'
+  padding: 10,
+  fontWeight: 'bold',
+  border: 'transparent',
 }
 
 styles.signupButton = {
-  // position: "absolute",
+  position: "absolute",
   fontSize: "20px",
   color: "red",
-  padding: 40,
-  fontWeight: 'bold'
+  right: "15%",
+  padding: 10,
+  fontWeight: 'bold',
+  border: 'transparent',
 }
 
 styles.welcome = {
-  paddingTop: "50px"
+  paddingTop: "50px",
 }
 
 styles.placeCenter = {
@@ -167,25 +187,24 @@ styles.listrestaurantsButton = {
          <Row horizontal='center' alignSelf='center'>
            <Link to="/" className="btn">
              <button className="btn" style={styles.mainButton}> 
-                RunningFood 
+                YeetFood 
              </button>
            </Link>
-           <Column flexGrow={0}>
-             <Link to="/login" style={styles.loginButton}>
-                Login
-             </Link>
-           </Column>
-           <Column flexGrow={0}>
-             <Link to="/signup" style={styles.signupButton}>Sign Up</Link>
-           </Column>
          </Row>
-         <Row horizontal='start'>
-           {/* <Column flexGrow={0.05}>
-             <Link to="/login" style={styles.loginButton}>Login</Link>
-           </Column>
-           <Column flexGrow={0.05}>
-             <Link to="/signup" style={styles.signupButton}>Sign Up</Link>
-           </Column> */}
+         {/* <Row horizontal='end' > */}
+           <Link to="/login" style={styles.loginButton}>
+              <button className="btn" style={styles.loginButton}> 
+                Login 
+              </button>
+             </Link>
+           <Link to="/signup" style={styles.signupButton}>
+              <button className="btn" style={styles.signupButton}> 
+                SignUp
+              </button>
+           </Link>
+         {/* </Row> */}
+         
+         {/* <Row horizontal='start'>
            <Column flexGrow={0.05}>
              <Link to="/profile" style={styles.profileButton}>Profile</Link>
            </Column>
@@ -207,7 +226,7 @@ styles.listrestaurantsButton = {
            <Column flexGrow={0.05} horizontal='space-between'>
            <Link to="/orderhistory" style ={styles.listrestaurantsButton}>Order History</Link>
            </Column>
-         </Row>
+         </Row> */}
        </Column>
      </ul>
    );
