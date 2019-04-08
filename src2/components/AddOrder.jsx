@@ -3,8 +3,12 @@ import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import "./Home.css";
-
+import AuthHelperMethods from './AuthHelperMethods';
+import Accountinfo from "./Accountinfo";
 class Menuitem extends Component {
+  Auth = new AuthHelperMethods();
+  Info = new Accountinfo();
+  
   state = {
     name: "",
     item: "",
@@ -15,6 +19,7 @@ class Menuitem extends Component {
   };
 
   handleSubmit = event => {
+  
     event.preventDefault();
     alert("name: " + this.state.title);
     const order= {
@@ -30,16 +35,21 @@ class Menuitem extends Component {
 
     axios
       .post("http://localhost:7000/addOrder", {
-        name: this.state.name,
+        name: this.Info.getName(),
         item: this.state.item,
         price: parseInt(this.state.price),
-        quantity:parseInt(this.state.quantity),
-        email:this.state.email,
+        quantity: parseInt(this.state.quantity),
+        email:this.Info.getEmail(),
         maker: this.state.maker
-      })
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.Auth.getToken()
+        }
+      }
+      )
       .then(res => {
-          //console.log("asdsadsa")
-        // name: res.data;
+         
         console.log(res.data);
       });
   };
@@ -51,14 +61,7 @@ class Menuitem extends Component {
           <h2>Add Order item</h2>
 
           {}
-          <TextField
-            type="name of buyer "
-            hintText="Enter the name of the buyer"
-            floatingLabelText="buyer name"
-            onChange={e => {
-              this.setState({ name: e.target.value });
-            }}
-          />
+          
           
           <TextField
             type="Dish name"
@@ -85,15 +88,7 @@ class Menuitem extends Component {
               this.setState({ price: e.target.value });
             }}
           />
-          <br />
-          <TextField
-            type="email"
-            hintText="Enter your Email"
-            floatingLabelText="Email"
-            onChange={e => {
-              this.setState({ email: e.target.value });
-            }}
-          />
+          
           
           <br />
           <TextField
