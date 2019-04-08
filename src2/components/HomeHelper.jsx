@@ -11,6 +11,14 @@ import MenuList from "@material-ui/core/MenuList";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    withRouter
+} from "react-router-dom";
+
 const styles = theme => ({
   root: {
     display: "flex"
@@ -31,6 +39,11 @@ styles2.button = {
     border: "transparent"
 }
 
+styles2.menuButton = {
+    fontWeight: "bold",
+    border: "transparent"
+}
+
 class Dropdown extends React.Component {
   state = {
     open: false
@@ -41,15 +54,15 @@ class Dropdown extends React.Component {
   };
 
   handleClose = event => {
-    if (this.anchorEl.contains(event.target)) {
-      return;
-    }
-
+    // if (this.anchorEl.contains(event.target)) {
+    //   return;
+    // }
     this.setState({ open: false });
   };
 
   render() {
     const { open } = this.state;
+    const { classes } = this.props;
 
     return (
       <div>
@@ -64,7 +77,7 @@ class Dropdown extends React.Component {
         >
           Options
         </Button>
-        <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
+        <Popper open={open} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
@@ -74,12 +87,34 @@ class Dropdown extends React.Component {
                   placement === "bottom" ? "center top" : "center bottom"
               }}
             >
-              <Paper>
+              <Paper >
                 <ClickAwayListener onClickAway={this.handleClose}>
                   <MenuList>
-                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/profile" style={styles2.menuButton}>Profile</Link>
+                    </MenuItem>
                     <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/addmenuitem" style ={styles2.menuButton}>Add Menu Item</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/displaymenu" style ={styles2.menuButton}>Show menu</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/addrestaurant" style ={styles2.menuButton}>Add restaurant</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/listrestaurants" style ={styles2.menuButton}>Find restaurants</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/addorder" style ={styles2.menuButton}>Add orders</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/addorder" style ={styles2.menuButton}>Add orders</Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/orderhistory" style ={styles2.menuButton}>Order History</Link>
+                    </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
