@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import AuthHelperMethods from './AuthHelperMethods';
+import Accountinfo from './Accountinfo';
+
  class Menulist extends Component{
-
-
+  Auth = new AuthHelperMethods();
+  Info = new Accountinfo();
     state ={
     email: "",
     item:[]
@@ -12,17 +15,18 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 handleSubmit = event => {
     event.preventDefault();
-    alert("owner: " + this.state.email);
-    const menu = {
-      owner: ""
-    };
+    
 
     axios
     .post('http://localhost:7000/getorderhistory',{
-    email:this.state.email
-    
-    
-    })
+    email:this.Info.getEmail()
+    },
+    {
+      headers: {
+        Authorization: 'Bearer ' + this.Auth.getToken()
+      }
+    }
+    )
     .then(res => {
      
         console.log(res.data);
@@ -36,15 +40,7 @@ render(){
         <MuiThemeProvider onSubmit={this.handleSubmit}>
           <h2>Order History</h2>
 
-          {}
-          <TextField
-            type="Email "
-            hintText="Enter the  email"
-            floatingLabelText="email"
-            onChange={e => {
-              this.setState({ email: e.target.value });
-            }}
-          />
+          
           <br/>
           <button onClick={this.handleSubmit}>Show</button>
         </MuiThemeProvider>
