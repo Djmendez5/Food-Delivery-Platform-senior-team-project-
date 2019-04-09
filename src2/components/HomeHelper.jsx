@@ -10,7 +10,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
-
+import AuthHelperMethods from './AuthHelperMethods';
+import Accountinfo from "./Accountinfo";
 import {
     BrowserRouter as Router,
     Route,
@@ -45,6 +46,15 @@ styles2.menuButton = {
 }
 
 class Dropdown extends React.Component {
+    Auth = new AuthHelperMethods();
+    Info = new Accountinfo();
+
+  /* Add the following into _handleLogout*/
+  _handleLogout = () => {
+  this.Auth.logout()
+  this.Info.logout()
+  //this.props.history.replace('/login');
+  }
   state = {
     open: false
   };
@@ -93,7 +103,7 @@ class Dropdown extends React.Component {
                     <MenuItem onClick={this.handleClose}>
                         <Link to="/profile" style={styles2.menuButton}>Profile</Link>
                     </MenuItem>
-                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={this._handleLogout} style ={styles2.menuButton}>Logout</MenuItem>
                     <MenuItem onClick={this.handleClose}>
                         <Link to="/addmenuitem" style ={styles2.menuButton}>Add Menu Item</Link>
                     </MenuItem>
