@@ -28,8 +28,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import HomeHelper from "./HomeHelper";
+import AddPictures from "./AddPictures";
 
 function App() {
+ 
   return (
     <Router>
       <div>
@@ -44,10 +46,14 @@ function App() {
         <Route path="/listrestaurants" component={ListRestaurants} />
         <Route path="/addorder" component={AddOrder} />
         <Route path="/orderhistory" component={OrderHistory} />
-        {/* <AuthButton /> */}
+        <Route path="/addpic" component={AddPIC} />
       </div>
     </Router>
   );
+}
+
+function AddPIC() {
+  return <AddPictures />;
 }
 
 function goProfile() {
@@ -168,6 +174,7 @@ styles.listrestaurantsButton = {
   color: "green"
 };
 function Header() {
+  
   return (
     <ul>
       <HomeHelper />
