@@ -10,14 +10,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
-import AuthHelperMethods from './AuthHelperMethods';
+import AuthHelperMethods from "./AuthHelperMethods";
 import Accountinfo from "./Accountinfo";
 import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Redirect,
-    withRouter
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
 } from "react-router-dom";
 
 const styles = theme => ({
@@ -32,29 +32,29 @@ const styles = theme => ({
 const styles2 = {};
 
 styles2.button = {
-    position: "absolute",
-    fontSize: "20px",
-    color: "red",
-    padding: 10,
-    fontWeight: "bold",
-    border: "transparent"
-}
+  position: "absolute",
+  fontSize: "20px",
+  color: "red",
+  padding: 10,
+  fontWeight: "bold",
+  border: "transparent"
+};
 
 styles2.menuButton = {
-    fontWeight: "bold",
-    border: "transparent"
-}
+  fontWeight: "bold",
+  border: "transparent",
+};
 
 class Dropdown extends React.Component {
-    Auth = new AuthHelperMethods();
-    Info = new Accountinfo();
+  Auth = new AuthHelperMethods();
+  Info = new Accountinfo();
 
   /* Add the following into _handleLogout*/
   _handleLogout = () => {
-  this.Auth.logout()
-  this.Info.logout()
-  //this.props.history.replace('/login');
-  }
+    this.Auth.logout();
+    this.Info.logout();
+    //this.props.history.replace('/login');
+  };
   state = {
     open: false
   };
@@ -97,33 +97,69 @@ class Dropdown extends React.Component {
                   placement === "bottom" ? "center top" : "center bottom"
               }}
             >
-              <Paper >
+              <Paper>
                 <ClickAwayListener onClickAway={this.handleClose}>
                   <MenuList>
                     <MenuItem onClick={this.handleClose}>
-                        <Link to="/profile" style={styles2.menuButton}>Profile</Link>
+                      <Link to="/profile" style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Profile
+                      </button>
+                      </Link>
                     </MenuItem>
-                    <MenuItem onClick={this._handleLogout} style ={styles2.menuButton}>Logout</MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                        <Link to="/addmenuitem" style ={styles2.menuButton}>Add Menu Item</Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                        <Link to="/displaymenu" style ={styles2.menuButton}>Show menu</Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                        <Link to="/addrestaurant" style ={styles2.menuButton}>Add restaurant</Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                        <Link to="/listrestaurants" style ={styles2.menuButton}>Find restaurants</Link>
+                    <MenuItem onClick={this._handleLogout} style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Logout
+                      </button>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
-                        <Link to="/addorder" style ={styles2.menuButton}>Add orders</Link>
+                      <Link to="/addmenuitem" style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Add Menu Item
+                      </button>
+                      </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
-                        <Link to="/addorder" style ={styles2.menuButton}>Add orders</Link>
+                      <Link to="/displaymenu" style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Show menu
+                      </button>
+                      </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
-                        <Link to="/orderhistory" style ={styles2.menuButton}>Order History</Link>
+                      <Link to="/addrestaurant" style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Add restaurant
+                      </button>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                      <Link to="/listrestaurants" style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Find restaurants
+                      </button>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                      <Link to="/addorder" style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Add Orders
+                      </button>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                      <Link to="/orderhistory" style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Order History
+                      </button>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                      <Link to="/addpic" style={styles2.menuButton}>
+                      <button className="btn" style={styles2.menuButton}>
+                        Add Picture
+                      </button>
+                      </Link>
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
