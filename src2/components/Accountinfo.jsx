@@ -7,7 +7,7 @@ export default class Accountinfo{
     axios.post('http://localhost:7000/Accountinfo',{
         username:username
     }).then(res => {
-        //console.log(res.data.user.firstname)
+        console.log(res.data)
         this.setName(res.data.user.firstname)
         this.setEmail(res.data.user.email)
         this.setAddress(res.data.user.address)
@@ -52,6 +52,7 @@ getPhone =()=>{
 }
 
 logout = () => {
+    localStorage.removeItem('id_name')
     localStorage.removeItem('id_email');
     localStorage.removeItem('id_address');
     localStorage.removeItem('id_username');

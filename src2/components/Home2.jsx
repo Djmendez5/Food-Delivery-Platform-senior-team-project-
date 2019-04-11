@@ -20,6 +20,7 @@ import AddRestaurant from "./AddRestaurant";
 import ListRestaurants from "./ListRestaurants";
 import AddOrder from "./AddOrder";
 import OrderHistory from "./OrderHistory";
+import Review from "./Review";
 //  import Chip from '@material-ui/core/Chip';
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
@@ -47,6 +48,7 @@ function App() {
         <Route path="/addorder" component={AddOrder} />
         <Route path="/orderhistory" component={OrderHistory} />
         <Route path="/addpic" component={AddPIC} />
+        <Route path="/review" component={Review} />
       </div>
     </Router>
   );
@@ -228,3 +230,4 @@ function Header() {
 }
 
 export default App;
+

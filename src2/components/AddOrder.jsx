@@ -21,17 +21,6 @@ class Menuitem extends Component {
   handleSubmit = event => {
   
     event.preventDefault();
-    alert("name: " + this.state.title);
-    const order= {
-      name: "",
-      item: "",
-      price: "",
-      quantity:"",
-      email: "",
-      maker: ""
-    };
-
-    console.log(order);
 
     axios
       .post("http://localhost:7000/addOrder", {

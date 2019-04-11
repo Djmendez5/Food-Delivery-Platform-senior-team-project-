@@ -3,8 +3,9 @@ import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import "./Home.css";
-
+import AuthHelperMethods from './AuthHelperMethods';
 class Restaurants extends Component {
+  Auth = new AuthHelperMethods();
   state = {
     name: "",
     description: "",
@@ -42,6 +43,11 @@ class Restaurants extends Component {
         website: this.state.website,
         address:this.state.address,
         city:this.state.city
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.Auth.getToken()
+        }
       })
       .then(res => {
         // name: res.data;

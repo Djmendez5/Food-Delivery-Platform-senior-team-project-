@@ -15,16 +15,51 @@ import { Column, Row } from "simple-flexbox";
 import Home from './Home'
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
+import AuthHelperMethods from './AuthHelperMethods';
+import Accountinfo from "./Accountinfo";
 
 class Signin extends Component {
-  state = { isLogin: false
+  info = new Accountinfo();
+  Auth = new AuthHelperMethods();
+  state = {  
+    username: "",
+  password: ""
   };
 
   logincheck = {
     cart: []
   }
+  _handleChange = (e) => {
+    //console.log(e.targer.value);
+    this.setState(
+        {
+          
+            [e.target.name]: e.target.value
+        }
+    )
+}
+handleFormSubmit = (e) => {
+  
+  
+  e.preventDefault();
+  
+  this.Auth.login(this.state.username, this.state.password)
+  this.info.loggedin(this.state.username)
+  
+  /*
+  .then(res => {
+    if (res === false) {
+      return alert("Sorry those credentials don't exist!");
+    }
+    this.props.history.replace("/");
+  })
+  .catch(err => {
+    alert(err);
+  });
+  */
+};
 
-  constructor(props) {
+  /*constructor(props) {
     super(props);
     var loginButtons = [];
     this.state = {
@@ -33,112 +68,45 @@ class Signin extends Component {
       loginscreen: [],
       loginmessage: "",
     };
-  } /* END CONSTRUCTOR */
+  } */
 
-  login = () => {
-    if (this.state.username == "Kevin" && this.state.password == "qwerty") {
-      fakeAuth.authenticate(() => {
-        this.setState({ isLogin: true });
-      });
-    }
-
-    if (this.state.username.length>0 && this.state.password.length>0) {
-      var payload = {
-        "username": this.state.username,
-        "password": this.state.password,
-      }
-
-      axios.get('/Accountinfo', (req,res) => {
-        this.setState({cart: res.data})
-        .then(function (res) {
-          console.log(res);
   
-          if (res.data.code == 200) {
-            console.log("Login successfull!");
-            console.log(res.data.user);
-  
-            // logic to log in
-            
-            console.log(this.logincheck.cart.username + " ")
-            // if cart username == this.username then 
-            // start session
-  
-          }
-
-        })
-      })
-      
-    }
-
-  };
 
   render() {
-    let { isLogin } = this.state;
-    if (isLogin) return <Redirect to={'/'} />;
-
-    console.log(this.state.username);
-    console.log(this.state.password);
+    
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider onSubmit={this.handleFormSubmit}>
         <div style={styles.placeCenter}>
-            <AuthButton />
+            
           <h2> Sign in </h2>
           <TextField
             type="username"
             hintText="Enter your Username"
             floatingLabelText="Username"
-            onChange={(event, newValue) =>
-              this.setState({ username: newValue })
-            }
+            //onChange={this._handleChange}
+            onChange={e => {
+              this.setState({ username: e.target.value });
+            }}
+            
           />
           <br />
           <TextField
             type="password"
             hintText="Enter your Password"
             floatingLabelText="Password"
-            onChange={(event, newValue) =>
-              this.setState({ password: newValue })
-            }
+            //onChange={this._handleChange}
+            onChange={e => {
+              this.setState({ password: e.target.value });
+            }}
+            
           />
           <br />
-          <button onClick={this.login}>Log in</button>
+          <button onClick={this.handleFormSubmit}>Log in</button>
         </div>
-      </MuiThemeProvider>
+        </MuiThemeProvider>
     );
   }
 }
-
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-        this.isAuthenticated = true;
-        setTimeout(cb, 100); // fake async
-    },
-    signout(cb) {
-        this.isAuthenticated = false;
-        setTimeout(cb, 100);
-    }
-};
-
-const AuthButton = withRouter(({ history }) =>
-    fakeAuth.isAuthenticated ? (
-        <p>
-            You are logged on !{" "}
-            <button
-                onClick={() => {
-                    fakeAuth.signout(() => history.push("/"));
-                }}
-            >
-                Sign out
-        </button>
-        </p>
-    ) : (
-            <p>
-                <br />
-                User: Kevin, Pass: qwerty
-      </p>
-        )
-);
 
 
 const styles = {};

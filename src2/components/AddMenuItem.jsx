@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import AuthHelperMethods from './AuthHelperMethods';
 import "./Home.css";
 
+  
+
 class Menuitem extends Component {
+  Auth = new AuthHelperMethods();
   state = {
-    tile: "",
+   item: "",
     description: "",
     nutrition_info: "",
     price: "",
@@ -15,9 +19,9 @@ class Menuitem extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    alert("name: " + this.state.title);
+    alert("name: " + this.state.item);
     const user = {
-      title: "",
+      item: "",
       description: "",
       nutrition_info:"",
       price: "",
@@ -28,12 +32,19 @@ class Menuitem extends Component {
 
     axios
       .post("http://localhost:7000/additem", {
-        title: this.state.title,
+        item: this.state.item,
         description: this.state.description,
         nutrition_info: this.state.nutrition_info,
         price:parseInt(this.state.price),
         owner: this.state.owner
-      })
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.Auth.getToken()
+        }
+      }
+      )
+      
       .then(res => {
           //console.log("asdsadsa")
         // name: res.data;
@@ -53,7 +64,7 @@ class Menuitem extends Component {
             hintText="Enter the name of the item"
             floatingLabelText="item name"
             onChange={e => {
-              this.setState({ title: e.target.value });
+              this.setState({ item: e.target.value });
             }}
           />
           

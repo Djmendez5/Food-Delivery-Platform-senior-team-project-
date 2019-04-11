@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import AuthHelperMethods from './AuthHelperMethods';
  class RestaurantList extends Component{
-
+  Auth = new AuthHelperMethods();
 
     state ={
     city: "",
@@ -22,6 +23,11 @@ handleSubmit = event => {
     city:this.state.city
     
     
+    },
+    {
+      headers: {
+        Authorization: 'Bearer ' + this.Auth.getToken()
+      }
     })
     .then(res => {
      
