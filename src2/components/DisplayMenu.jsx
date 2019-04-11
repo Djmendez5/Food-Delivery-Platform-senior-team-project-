@@ -56,7 +56,7 @@ render(){
           <button onClick={this.handleSubmit}>Show</button>
         </MuiThemeProvider>
         <ul>
-        {this.state.item.map(menu=> <li key ={menu.id}>{"Name:"}{menu.title}{<br/>}{"Description: "}{menu.description}{<br/>}{"Nutritional info: "}{menu.nutrition_info}{<br/>}{"Price: $"}{menu.price}{<br/>}{"owner: "}{menu.owner}</li>)}
+        {this.state.item.map(menu=> <li key ={menu.id}>{"Name:"}{menu.item}{<br/>}{"Description: "}{menu.description}{<br/>}{"Nutritional info: "}{menu.nutrition_info}{<br/>}{"Price: $"}{menu.price}{<br/>}{"maker email: "}{menu.owner}</li>)}
         </ul>
         </div>
     )
