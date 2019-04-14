@@ -30,6 +30,7 @@ import MenuList from "@material-ui/core/MenuList";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import HomeHelper from "./HomeHelper";
 import AddPictures from "./AddPictures";
+import GetPictures from "./GetPictures";
 
 function App() {
  
@@ -48,10 +49,15 @@ function App() {
         <Route path="/addorder" component={AddOrder} />
         <Route path="/orderhistory" component={OrderHistory} />
         <Route path="/addpic" component={AddPIC} />
+        <Route path="/getpic" component={GetPIC} />
         <Route path="/review" component={Review} />
       </div>
     </Router>
   );
+}
+
+function GetPIC() {
+  return <GetPictures />;
 }
 
 function AddPIC() {
@@ -230,4 +236,3 @@ function Header() {
 }
 
 export default App;
-
