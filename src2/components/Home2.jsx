@@ -205,31 +205,6 @@ function Header() {
             SignUp
           </button>
         </Link>
-        {/* </Row> */}
-
-        {/* <Row horizontal='start'>
-           <Column flexGrow={0.05}>
-             <Link to="/profile" style={styles.profileButton}>Profile</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/addmenuitem" style ={styles.addmenuButton}>Add Menu Item</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/displaymenu" style ={styles.addmenuButton}>Show menu</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/addrestaurant" style ={styles.addrestaurantButton}>Add restaurant</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/listrestaurants" style ={styles.listrestaurantsButton}>Find restaurants</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/addorder" style ={styles.listrestaurantsButton}>Add orders</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/orderhistory" style ={styles.listrestaurantsButton}>Order History</Link>
-           </Column>
-         </Row> */}
       </Column>
     </ul>
   );
