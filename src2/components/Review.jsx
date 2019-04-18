@@ -62,7 +62,7 @@ class PersonInput extends Component {
 
 
   render() {
-  console.log(this.state.location);
+ // console.log(this.state.location);
     return (
       <div style={styles.placeCenter}> 
         <MuiThemeProvider onSubmit={this.handleSubmit}>

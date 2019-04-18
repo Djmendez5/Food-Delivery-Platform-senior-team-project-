@@ -36,6 +36,7 @@ class Menuitem extends Component {
         description: this.state.description,
         nutrition_info: this.state.nutrition_info,
         price:parseInt(this.state.price),
+        cost:parseInt(this.state.cost),
         owner: this.state.owner
       },
       {
@@ -91,6 +92,14 @@ class Menuitem extends Component {
             floatingLabelText="price"
             onChange={e => {
               this.setState({ price: e.target.value });
+            }}
+          />
+          <TextField
+            type="cost"
+            hintText="Enter the cost of producing the item"
+            floatingLabelText="cost"
+            onChange={e => {
+              this.setState({ cost: e.target.value });
             }}
           />
           <br />

@@ -7,6 +7,7 @@ import AuthHelperMethods from './AuthHelperMethods';
 class Restaurants extends Component {
   Auth = new AuthHelperMethods();
   state = {
+    license:"",
     name: "",
     description: "",
     email: "",
@@ -21,6 +22,7 @@ class Restaurants extends Component {
     event.preventDefault();
     alert("name: " + this.state.name);
     const rest = {
+      license:"",
         name: "",
         description: "",
         email: "",
@@ -35,6 +37,7 @@ class Restaurants extends Component {
 
     axios
       .post("http://localhost:7000/addRestaurant", {
+        license:this.state.license,
         name: this.state.name,
         description: this.state.description,
         email: this.state.email,
@@ -50,6 +53,7 @@ class Restaurants extends Component {
         }
       })
       .then(res => {
+        
         // name: res.data;
         console.log(res.data);
       });
@@ -62,6 +66,14 @@ class Restaurants extends Component {
           <h2>Register your Restaurant</h2>
 
           {}
+          <TextField
+            type="license"
+            hintText="Enter the license number"
+            floatingLabelText="license"
+            onChange={e => {
+              this.setState({license: e.target.value });
+            }}
+          />
           <TextField
             type="name"
             hintText="Enter the name"
