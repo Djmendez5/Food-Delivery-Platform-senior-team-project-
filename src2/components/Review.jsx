@@ -18,12 +18,7 @@ class PersonInput extends Component {
     price:"",
     owner: ""
   };
-/*
-  componentDidMount() {
-  axios.post("http://localhost:7000/getUserLocation")
-      .then(response => this.setState({location:response.data}))
-      .catch(err => console.log('error', err))
-  }*/
+
 
   handleSubmit = event => {
     event.preventDefault();
@@ -38,7 +33,7 @@ class PersonInput extends Component {
     };
     this.Rev.componentDidMount(this.state.item)
 
-    console.log(this.Auth.getToken());
+    
 
     axios
       .post("http://localhost:7000/review", {

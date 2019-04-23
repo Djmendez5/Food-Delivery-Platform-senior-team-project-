@@ -161,16 +161,15 @@ class Dropdown extends React.Component {
                         </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
-                      <Link to="/addpic" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
-                        Add Picture
-                      </button>
-                      </Link>
+                        <Link to="/review" style ={styles2.menuButton}><button className="btn" 
+                        style={styles2.menuButton}>Write a review
+                        </button>
+                        </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
-                      <Link to="/getpic" style={styles2.menuButton}>
+                      <Link to="/profit" style={styles2.menuButton}>
                       <button className="btn" style={styles2.menuButton}>
-                        Get Picture
+                        Show your profit
                       </button>
                       </Link>
                     </MenuItem>

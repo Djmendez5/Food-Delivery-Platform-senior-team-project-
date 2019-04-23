@@ -20,6 +20,7 @@ import AddRestaurant from "./AddRestaurant";
 import ListRestaurants from "./ListRestaurants";
 import AddOrder from "./AddOrder";
 import OrderHistory from "./OrderHistory";
+import Review from "./Review";
 //  import Chip from '@material-ui/core/Chip';
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
@@ -28,7 +29,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import HomeHelper from "./HomeHelper";
-
+import AddPictures from "./AddPictures";
+import GetPictures from "./GetPictures";
+import DisplayProfit from './DisplayProfit';
 function App() {
  
   return (
@@ -45,10 +48,21 @@ function App() {
         <Route path="/listrestaurants" component={ListRestaurants} />
         <Route path="/addorder" component={AddOrder} />
         <Route path="/orderhistory" component={OrderHistory} />
-        {/* <AuthButton /> */}
+        <Route path="/addpic" component={AddPIC} />
+        <Route path="/getpic" component={GetPIC} />
+        <Route path="/review" component={Review} />
+        <Route path='/profit' component ={DisplayProfit}/>
       </div>
     </Router>
   );
+}
+
+function GetPIC() {
+  return <GetPictures />;
+}
+
+function AddPIC() {
+  return <AddPictures />;
 }
 
 function goProfile() {
@@ -192,31 +206,6 @@ function Header() {
             SignUp
           </button>
         </Link>
-        {/* </Row> */}
-
-        {/* <Row horizontal='start'>
-           <Column flexGrow={0.05}>
-             <Link to="/profile" style={styles.profileButton}>Profile</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/addmenuitem" style ={styles.addmenuButton}>Add Menu Item</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/displaymenu" style ={styles.addmenuButton}>Show menu</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/addrestaurant" style ={styles.addrestaurantButton}>Add restaurant</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/listrestaurants" style ={styles.listrestaurantsButton}>Find restaurants</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/addorder" style ={styles.listrestaurantsButton}>Add orders</Link>
-           </Column>
-           <Column flexGrow={0.05} horizontal='space-between'>
-           <Link to="/orderhistory" style ={styles.listrestaurantsButton}>Order History</Link>
-           </Column>
-         </Row> */}
       </Column>
     </ul>
   );

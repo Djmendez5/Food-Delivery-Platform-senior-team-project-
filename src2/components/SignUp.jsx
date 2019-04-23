@@ -15,6 +15,7 @@ class PersonInput extends Component {
   };
 
   handleSubmit = event => {
+    
     event.preventDefault();
     alert("name: " + this.state.firstname);
     const user = {
@@ -35,7 +36,8 @@ class PersonInput extends Component {
         username: this.state.username,
         phone:this.state.phone,
         password: this.state.password,
-        email: this.state.email
+        email: this.state.email,
+        isRestaurant: false
       })
       .then(res => {
         // name: res.data;

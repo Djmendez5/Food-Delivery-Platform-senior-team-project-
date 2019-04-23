@@ -5,10 +5,11 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import "./Home.css";
 import AuthHelperMethods from './AuthHelperMethods';
 import Accountinfo from "./Accountinfo";
+import getprofit from "./getprofit";
 class Menuitem extends Component {
   Auth = new AuthHelperMethods();
   Info = new Accountinfo();
-  
+  Prof = new getprofit();
   state = {
     name: "",
     item: "",
@@ -19,7 +20,9 @@ class Menuitem extends Component {
   };
 
   handleSubmit = event => {
-  
+    this.Prof.componentDidMount(this.state.item,this.state.maker,this.state.quantity)
+  //console.log("s",this.state.item)
+  //console.log("s2",this.state.maker)
     event.preventDefault();
 
     axios
@@ -42,6 +45,7 @@ class Menuitem extends Component {
         console.log(res.data);
       });
   };
+
 
   render() {
     return (

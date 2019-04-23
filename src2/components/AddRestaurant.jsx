@@ -4,7 +4,9 @@ import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import "./Home.css";
 import AuthHelperMethods from './AuthHelperMethods';
+import Accountinfo from './Accountinfo';
 class Restaurants extends Component {
+  Info = new Accountinfo();
   Auth = new AuthHelperMethods();
   state = {
     license:"",
@@ -19,6 +21,15 @@ class Restaurants extends Component {
   };
   
   handleSubmit = event => {
+    axios.put("http://localhost:7000/isRestaurant",{
+      username: this.Info.getUsername()
+
+    },
+    {
+      headers: {
+        Authorization: 'Bearer ' + this.Auth.getToken()
+      }
+    })
     event.preventDefault();
     alert("name: " + this.state.name);
     const rest = {
