@@ -21,6 +21,7 @@ import ListRestaurants from "./ListRestaurants";
 import AddOrder from "./AddOrder";
 import OrderHistory from "./OrderHistory";
 import Review from "./Review";
+
 //  import Chip from '@material-ui/core/Chip';
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
@@ -30,6 +31,8 @@ import MenuList from "@material-ui/core/MenuList";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import HomeHelper from "./HomeHelper";
 import AddPictures from "./AddPictures";
+import GetPictures from "./GetPictures";
+import DisplayProfit from './DisplayProfit';
 
 function App() {
  
@@ -230,4 +233,3 @@ function Header() {
 }
 
 export default App;
-
