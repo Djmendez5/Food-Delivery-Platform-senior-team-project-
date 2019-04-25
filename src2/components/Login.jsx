@@ -45,7 +45,7 @@ handleFormSubmit = (e) => {
   
   this.Auth.login(this.state.username, this.state.password)
   this.info.loggedin(this.state.username)
-  
+  this.props.history.push("/profile");
   /*
   .then(res => {
     if (res === false) {
@@ -118,4 +118,5 @@ styles.placeCenter = {
 };
 
 
-export default Signin;
+//export default Signin;
+export default withRouter(Signin);

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -53,7 +54,8 @@ class Dropdown extends React.Component {
   _handleLogout = () => {
     this.Auth.logout();
     this.Info.logout();
-    //this.props.history.replace('/login');
+
+    this.props.history.push('/login');
   };
   state = {
     open: false
@@ -201,5 +203,5 @@ class Dropdown extends React.Component {
 Dropdown.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
-export default Dropdown;
+export default withRouter(Dropdown);
+//export default Dropdown;

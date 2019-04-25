@@ -3,7 +3,7 @@ import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import "./Home.css";
-
+import { Link, withRouter } from "react-router-dom";
 class PersonInput extends Component {
   state = {
     firstname: "",
@@ -42,6 +42,7 @@ class PersonInput extends Component {
       .then(res => {
         // name: res.data;
         console.log(res.data);
+        this.props.history.push("/login");
       });
   };
 
@@ -120,4 +121,5 @@ styles.placeCenter = {
   paddingTop: "200px"
 }
 
-export default PersonInput;
+//export default PersonInput;
+export default withRouter(PersonInput);

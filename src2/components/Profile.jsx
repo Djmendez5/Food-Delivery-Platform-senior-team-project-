@@ -26,7 +26,10 @@ class PersonInput extends Component {
 
 
   axios.post("http://localhost:7000/getUserLocation")
-      .then(response => this.setState({location:response.data}))
+      .then(response => {
+        console.log("dsad",response.data)
+        localStorage.setItem('location', JSON.stringify(response.data))
+      })
       //.then(response => {console.log("dsad",response.data)})
       .catch(err => console.log('error', err))
   }
@@ -76,7 +79,7 @@ class PersonInput extends Component {
     return (
       <div style={styles.placeCenter}> 
         <MuiThemeProvider onSubmit={this.handleSubmit}>
-          <h2> User Profile </h2>
+          <h2> Edit your profile if you'd like </h2>
 
           {}
           <TextField

@@ -10,7 +10,7 @@ class GetPic extends React.Component {
         showPic: null
     }
     getPictures = () => {
-
+        let pic = "aiyehd4sljtrgwosboxn"
         axios.get("https://res.cloudinary.com/fooddelivery/image/upload/v1555240848/sb7y4vym5esmaqwgv2fb.jpg")
         .then(res => {
             this.setState({
@@ -21,11 +21,14 @@ class GetPic extends React.Component {
     } 
 
     render() {
+        let pic= "aiyehd4sljtrgwosboxn"
+        var link = `https://res.cloudinary.com/fooddelivery/image/upload/v1555240848/${pic}.jpg`
         return (
             <div>
                 <button onClick={this.getPictures} > Get Pictures </button>
                 <img src = {this.state.showPic}  />
-                <img src = "https://res.cloudinary.com/fooddelivery/image/upload/v1555240848/sb7y4vym5esmaqwgv2fb.jpg" />
+    
+                <img src = "https://res.cloudinary.com/fooddelivery/image/upload/v1555240848/aiyehd4sljtrgwosboxn.jpg" />
             </div>
         );
     }

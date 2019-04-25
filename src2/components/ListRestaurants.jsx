@@ -10,10 +10,48 @@ import AuthHelperMethods from './AuthHelperMethods';
     city: "",
     item:[]
 };
+getCurrentCity =(arr)=>{
+  let city;
+  
+  for(let i =0; i< arr.length;i++){
+    if(arr[i].types[0]==="postal_code"){
+      city=(arr[i].formatted_address)
+    }
+  }
+  city = city.substring(0,city.indexOf(","));
+console.log(city)
+  axios
+  .post('http://localhost:7000/getrestaurants',{
+  city:city
+  
+  
+  },
+  {
+    headers: {
+      Authorization: 'Bearer ' + this.Auth.getToken()
+    }
+  })
+  .then(res => {
+   
+      console.log(res.data);
+          this.setState({item: res.data});
+
+});
+
+
+}
+handleSubmit2 = event => {
+ 
+
+  const location=JSON.parse(localStorage.getItem('location'))
+  axios.post('http://localhost:7000/getAddress', location)
+  .then(res=>this.getCurrentCity(res.data.results))
+  
+}
 
 handleSubmit = event => {
     event.preventDefault();
-    alert("city: " + this.state.city);
+   
     const restaurants = {
       city: ""
     };
@@ -57,6 +95,8 @@ render(){
         <ul>
         {this.state.item.map(Restaurant=> <li key ={Restaurant.id}>{"Name:"}{Restaurant.name}{<br/>}{"Description: "}{Restaurant.description}{<br/>}{"email: "}{Restaurant.email}{<br/>}{"hours"}{Restaurant.hours}{<br/>}{"contact info: "}{Restaurant.contact_info}<br/>{"website: "}{Restaurant.website}<br/>{"address: "}{Restaurant.address}</li>)}
         </ul>
+        <br/>
+        <button onClick={this.handleSubmit2}>Show Near Me!</button>
         </div>
     )
 }
