@@ -26,6 +26,7 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
+import PropTypes from "prop-types";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import HomeHelper from "./HomeHelper";
 import AddPictures from "./AddPictures";
@@ -80,20 +81,8 @@ function Home() {
   console.log("Hello");
   return (
     <MuiThemeProvider>
-      <Row horizontal="center">
-        <h2 className="food-Image" style={styles.welcome}>
-          Find Restaurant 
-          <TextField
-            type="location"
-            // hintText="Address"
-            // floatingLabelText="Find Restaurant"
-            // onChange={(event, newValue) =>
-            //   this.setState({ username: newValue })
-            // }
-
-            variant="outlined"
-          />
-        </h2>
+      <Row horizontal="center" className="food-Image" style={styles.welcome}>
+        <h2> We deliver straight to your door </h2>
       </Row>
     </MuiThemeProvider>
   );
@@ -130,7 +119,8 @@ function Topics({ match }) {
 const styles = {};
 
 styles.mainButton = {
-  // position: "absolute",
+  border: "transparent",
+  textDecoration: "none",
   fontSize: "50px",
   color: "red",
   attachment: "fixed",
@@ -189,6 +179,7 @@ styles.listrestaurantsButton = {
   fontSize: "20px",
   color: "green"
 };
+
 function Header() {
   
   return (
@@ -196,10 +187,10 @@ function Header() {
       <HomeHelper />
       <Column flexGrow={0}>
         <Row horizontal="center" alignSelf="center">
-          <Link to="/" className="btn">
-            <button className="btn" style={styles.mainButton}>
-              YeetFood
-            </button>
+          <Link to="/" style={{ textDecoration: 'none'}}>
+            <Button style={styles.mainButton}>
+              YEETFOOD
+            </Button>
           </Link>
         </Row>
         {/* <Row horizontal='end' > */}
