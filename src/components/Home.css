@@ -1,0 +1,21 @@
+
+.style {
+    background-position: center center;
+    background-color: LightGray;
+}
+
+.food-Image {
+    background-image: url("https://www.mcdonalds.com.my/storage/foods/September2017/thumb1hmayamgoreng-3aecde4c5e.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1000px;
+    background-size: 500px 500px;
+    /* background-attachment: fixed; */
+}
+
+.position2 {
+    background-repeat: no-repeat;
+    position: static;
+}
+
+
