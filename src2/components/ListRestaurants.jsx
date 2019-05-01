@@ -3,8 +3,17 @@ import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AuthHelperMethods from './AuthHelperMethods';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
+import Accountinfo from './Accountinfo'
  class RestaurantList extends Component{
   Auth = new AuthHelperMethods();
+  Info = new Accountinfo();
 
     state ={
     city: "",
@@ -12,14 +21,14 @@ import AuthHelperMethods from './AuthHelperMethods';
 };
 getCurrentCity =(arr)=>{
   let city;
-  
+  //console.log(arr)
   for(let i =0; i< arr.length;i++){
     if(arr[i].types[0]==="postal_code"){
       city=(arr[i].formatted_address)
     }
   }
   city = city.substring(0,city.indexOf(","));
-console.log(city)
+//console.log(city)
   axios
   .post('http://localhost:7000/getrestaurants',{
   city:city
@@ -40,6 +49,16 @@ console.log(city)
 
 
 }
+handleSubmit4 =event =>{
+  event.preventDefault();
+  if(this.Auth.getToken()===null){
+    alert("please log in")
+    this.props.history.replace("/login");
+  }
+  else{
+    this.handleSubmit2()
+  }
+}
 handleSubmit2 = event => {
  
 
@@ -48,14 +67,20 @@ handleSubmit2 = event => {
   .then(res=>this.getCurrentCity(res.data.results))
   
 }
-
+handleSubmit3=event =>{
+  event.preventDefault();
+  if(this.Auth.getToken()===null){
+    alert("please log in")
+    this.props.history.replace("/login");
+  }
+  else{
+    this.handleSubmit()
+  }
+}
 handleSubmit = event => {
-    event.preventDefault();
+    //event.preventDefault();
    
-    const restaurants = {
-      city: ""
-    };
-
+    
     axios
     .post('http://localhost:7000/getrestaurants',{
     city:this.state.city
@@ -73,6 +98,10 @@ handleSubmit = event => {
             this.setState({item: res.data});
 
 });
+if(this.state.item.length ===0){
+  alert("That city is not correct");
+}
+
 };
 render(){
     return(
@@ -90,13 +119,13 @@ render(){
             }}
           />
           <br/>
-          <button onClick={this.handleSubmit}>Show</button>
+          <button onClick={this.handleSubmit3}>Show</button>
         </MuiThemeProvider>
         <ul>
         {this.state.item.map(Restaurant=> <li key ={Restaurant.id}>{"Name:"}{Restaurant.name}{<br/>}{"Description: "}{Restaurant.description}{<br/>}{"email: "}{Restaurant.email}{<br/>}{"hours"}{Restaurant.hours}{<br/>}{"contact info: "}{Restaurant.contact_info}<br/>{"website: "}{Restaurant.website}<br/>{"address: "}{Restaurant.address}</li>)}
         </ul>
         <br/>
-        <button onClick={this.handleSubmit2}>Show Near Me!</button>
+        <button onClick={this.handleSubmit4}>Show Near Me!</button>
         </div>
     )
 }
@@ -108,4 +137,4 @@ styles.placeCenter = {
   left: "40%",
   paddingTop: "200px"
 }
-export default RestaurantList;
+export default withRouter(RestaurantList);

@@ -5,6 +5,13 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import "./Home.css";
 import AuthHelperMethods from './AuthHelperMethods';
 import Accountinfo from './Accountinfo';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 class Restaurants extends Component {
   Info = new Accountinfo();
   Auth = new AuthHelperMethods();
@@ -19,7 +26,16 @@ class Restaurants extends Component {
     address:"",
     city:""
   };
-  
+  handleSubmit2 =event =>{
+    event.preventDefault();
+    if(this.Auth.getToken()===null){
+      alert("please log in")
+      this.props.history.replace("/login");
+    }
+    else{
+      this.handleSubmit()
+    }
+  }
   handleSubmit = event => {
     axios.put("http://localhost:7000/isRestaurant",{
       username: this.Info.getUsername()
@@ -30,8 +46,8 @@ class Restaurants extends Component {
         Authorization: 'Bearer ' + this.Auth.getToken()
       }
     })
-    event.preventDefault();
-    alert("name: " + this.state.name);
+    
+   
     const rest = {
       license:"",
         name: "",
@@ -43,8 +59,7 @@ class Restaurants extends Component {
         address:"",
         city:""
     };
-
-    console.log(rest);
+    
 
     axios
       .post("http://localhost:7000/addRestaurant", {
@@ -65,8 +80,8 @@ class Restaurants extends Component {
       })
       .then(res => {
         
-        // name: res.data;
-        console.log(res.data);
+        
+        //console.log(res.data);
       });
   };
 
@@ -156,7 +171,7 @@ class Restaurants extends Component {
           />
           <br />
 
-          <button onClick={this.handleSubmit}>Sign Up</button>
+          <button onClick={this.handleSubmit2}>Sign Up</button>
         </MuiThemeProvider>
       </div>
     );
@@ -171,4 +186,4 @@ styles.placeCenter = {
   paddingTop: "200px"
 }
 
-export default Restaurants;
+export default withRouter(Restaurants);

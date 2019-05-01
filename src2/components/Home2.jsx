@@ -35,7 +35,7 @@ import GetPictures from "./GetPictures";
 import DisplayProfit from './DisplayProfit';
 
 function App() {
- 
+ console.log("asdasdasdadad");
   return (
     <Router>
       <div>
@@ -197,11 +197,7 @@ function Header() {
             Login
           </button>
         </Link>
-        <Link to="/signup" style={styles.signupButton}>
-          <button className="btn" style={styles.signupButton}>
-            SignUp
-          </button>
-        </Link>
+        
         {/* </Row> */}
 
         {/* <Row horizontal='start'>

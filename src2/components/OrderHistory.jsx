@@ -4,6 +4,13 @@ import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AuthHelperMethods from './AuthHelperMethods';
 import Accountinfo from './Accountinfo';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 
  class Menulist extends Component{
   Auth = new AuthHelperMethods();
@@ -12,11 +19,19 @@ import Accountinfo from './Accountinfo';
     email: "",
     item:[]
 };
-
+handleSubmit2 =event =>{
+  event.preventDefault();
+  if(this.Auth.getToken()===null){
+    alert("please log in")
+    this.props.history.replace("/login");
+  }
+  else{
+    this.handleSubmit()
+  }
+}
 handleSubmit = event => {
-    event.preventDefault();
-    
 
+  
     axios
     .post('http://localhost:7000/getorderhistory',{
     email:this.Info.getEmail()
@@ -42,7 +57,7 @@ render(){
 
           
           <br/>
-          <button onClick={this.handleSubmit}>Show</button>
+          <button onClick={this.handleSubmit2}>Show</button>
         </MuiThemeProvider>
         <ul>
         {this.state.item.map(orders=> <li key ={orders.id}>{"Name:"}{orders.item}{<br/>}{"Price: $"}{orders.price}{<br/>}{"quantity: "}{orders.quantity}{<br/>}{"maker: "}{orders.maker}{<br/>}{"order date:"}{orders.createdAt}</li>)}
@@ -58,4 +73,4 @@ styles.placeCenter = {
   left: "40%",
   paddingTop: "200px"
 }
-export default Menulist;
+export default withRouter(Menulist);

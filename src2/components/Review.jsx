@@ -6,7 +6,14 @@ import AuthHelperMethods from './AuthHelperMethods';
 import "./Home.css";
 import Accountinfo from "./Accountinfo";
 import getreview from './getreview'
-  
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
+
 class PersonInput extends Component {
   Auth = new AuthHelperMethods();
   Info = new Accountinfo();
@@ -19,9 +26,18 @@ class PersonInput extends Component {
     owner: ""
   };
 
-
-  handleSubmit = event => {
+  handleSubmit2 =event =>{
     event.preventDefault();
+    if(this.Auth.getToken()===null){
+      alert("please log in")
+      this.props.history.replace("/login");
+    }
+    else{
+      this.handleSubmit()
+    }
+  }
+  handleSubmit = event => {
+   
     alert("item: " + this.state.item);
     
     const user = {
@@ -83,7 +99,7 @@ class PersonInput extends Component {
           />
           <br />
 
-          <button onClick={this.handleSubmit}> Submit rating</button>
+          <button onClick={this.handleSubmit2}> Submit rating</button>
         </MuiThemeProvider>
       </div>
     );
@@ -98,4 +114,4 @@ styles.placeCenter = {
   paddingTop: "200px"
 }
 
-export default PersonInput;
+export default withRouter(PersonInput);

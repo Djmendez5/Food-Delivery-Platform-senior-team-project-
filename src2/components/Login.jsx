@@ -12,11 +12,12 @@ import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Profile from "./Profile";
 import { Column, Row } from "simple-flexbox";
-import Home from './Home'
+import Home from './Home';
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
 import AuthHelperMethods from './AuthHelperMethods';
 import Accountinfo from "./Accountinfo";
+import Home2 from './Home2';
 
 class Signin extends Component {
   info = new Accountinfo();
@@ -46,30 +47,11 @@ handleFormSubmit = (e) => {
   this.Auth.login(this.state.username, this.state.password)
   this.info.loggedin(this.state.username)
   this.props.history.push("/profile");
-  /*
-  .then(res => {
-    if (res === false) {
-      return alert("Sorry those credentials don't exist!");
-    }
-    this.props.history.replace("/");
-  })
-  .catch(err => {
-    alert(err);
-  });
-  */
+  //this.props.history.push("/home2");
+  
 };
 
-  /*constructor(props) {
-    super(props);
-    var loginButtons = [];
-    this.state = {
-      username: "",
-      password: "",
-      loginscreen: [],
-      loginmessage: "",
-    };
-  } */
-
+  
   
 
   render() {
@@ -77,7 +59,6 @@ handleFormSubmit = (e) => {
     return (
       <MuiThemeProvider onSubmit={this.handleFormSubmit}>
         <div style={styles.placeCenter}>
-            
           <h2> Sign in </h2>
           <TextField
             type="username"
@@ -85,6 +66,7 @@ handleFormSubmit = (e) => {
             floatingLabelText="Username"
             //onChange={this._handleChange}
             onChange={e => {
+              
               this.setState({ username: e.target.value });
             }}
             

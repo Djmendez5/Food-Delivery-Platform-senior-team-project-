@@ -3,12 +3,20 @@ import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AuthHelperMethods from './AuthHelperMethods';
+import Accountinfo from "./Accountinfo";
 import "./Home.css";
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
   
 
 class Menuitem extends Component {
   Auth = new AuthHelperMethods();
+  Info = new Accountinfo();
   state = {
    item: "",
     description: "",
@@ -17,8 +25,24 @@ class Menuitem extends Component {
     email: ""
   };
 
-  handleSubmit = event => {
+  handleSubmit2 =event =>{
     event.preventDefault();
+    console.log(this.Info.getisRestaurant())
+    if(this.Auth.getToken()===null){
+      alert("please log in ")
+      this.props.history.replace("/login");
+    
+    }
+    else if(this.Info.getisRestaurant()==="false"){
+      alert("please log in as a Restaurant")
+      this.props.history.replace("/login");
+    }
+    else{
+      this.handleSubmit()
+    }
+  }
+  handleSubmit = event => {
+    //event.preventDefault();
     alert("name: " + this.state.item);
     const user = {
       item: "",
@@ -37,7 +61,8 @@ class Menuitem extends Component {
         nutrition_info: this.state.nutrition_info,
         price:parseInt(this.state.price),
         cost:parseInt(this.state.cost),
-        owner: this.state.owner
+        owner: this.state.owner,
+        picture:"https://res.cloudinary.com/fooddelivery/image/upload/v1555240848/x6vuu1a027pnkffq0x9c.jpg"
       },
       {
         headers: {
@@ -112,7 +137,7 @@ class Menuitem extends Component {
             }}
           />
           <br/>
-          <button onClick={this.handleSubmit}>Add</button>
+          <button onClick={this.handleSubmit2}>Add</button>
         </MuiThemeProvider>
       </div>
     );
@@ -127,4 +152,4 @@ styles.placeCenter = {
   paddingTop: "200px"
 }
 
-export default Menuitem;
+export default withRouter(Menuitem);

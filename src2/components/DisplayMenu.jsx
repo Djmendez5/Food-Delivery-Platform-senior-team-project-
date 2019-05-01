@@ -3,6 +3,13 @@ import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AuthHelperMethods from './AuthHelperMethods';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
  class Menulist extends Component{
   Auth = new AuthHelperMethods();
 
@@ -10,12 +17,22 @@ import AuthHelperMethods from './AuthHelperMethods';
     email: "",
     item:[]
 };
+handleSubmit2 =event =>{
+  event.preventDefault();
+  if(this.Auth.getToken()===null){
+    alert("please log in")
+    this.props.history.replace("/login");
+  }
+  else{
+    this.handleSubmit()
+  }
+}
 
 handleSubmit = event => {
   
-    event.preventDefault();
+    
     console.log(this.Auth.getToken())
-    alert("owner: " + this.state.email);
+    
     const menu = {
       owner: ""
     };
@@ -35,6 +52,7 @@ handleSubmit = event => {
             this.setState({item: res.data});
 
 });
+
 };
 render(){
     return(
@@ -53,10 +71,10 @@ render(){
             }}
           />
           <br/>
-          <button onClick={this.handleSubmit}>Show</button>
+          <button onClick={this.handleSubmit2}>Show</button>
         </MuiThemeProvider>
         <ul>
-        {this.state.item.map(menu=> <li key ={menu.id}>{"Name:"}{menu.item}{<br/>}{"Description: "}{menu.description}{<br/>}{"Nutritional info: "}{menu.nutrition_info}{<br/>}{"Price: $"}{menu.price}{<br/>}{"maker email: "}{menu.owner} <br/><img src = {menu.picture}  /></li>)}
+        {this.state.item.map(menu=> <li key ={menu.id}>{"Name:"}{menu.item}{<br/>}{"Description: "}{menu.description}{<br/>}{"Nutritional info: "}{menu.nutrition_info}{<br/>}{"Price: $"}{menu.price}{<br/>}{"maker email: "}{menu.owner}<br/>{"Rating :"}{menu.review} <br/><img src = {menu.picture} height="200" width="200"  /></li>)}
         
         </ul>
         </div>
@@ -70,4 +88,4 @@ styles.placeCenter = {
   left: "40%",
   paddingTop: "200px"
 }
-export default Menulist;
+export default withRouter(Menulist);

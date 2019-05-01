@@ -36,11 +36,7 @@ class getreview extends Component{
 
   componentDidMount = (item) =>{   
 this.state.item = item;
-  //const review[];
-  //componentDidMount() {
-     // event.preventDefault();
-      //alert("item: h" + this.state.item);
-      
+  
       axios
       .post('http://localhost:7000/getreview',{
       item:this.state.item,
@@ -51,13 +47,12 @@ this.state.item = item;
         }
       })
       .then(res => {
-        //this.state.reviews:res.data
+       
           this.update_review(res.data);
-             // this.setState({reviews: res.data});
-             // console.log(res.data);
+             
   
   });
-  //console.log(this.state.reviews)
+ 
   };
   render(){
       return(

@@ -4,6 +4,14 @@ import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AuthHelperMethods from './AuthHelperMethods';
 import "./Home.css";
+import Accountinfo from "./Accountinfo";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 
 class PersonInput extends Component {
   Auth = new AuthHelperMethods();
@@ -18,13 +26,6 @@ class PersonInput extends Component {
   };
 
   componentDidMount() {
-
-
-
-
-
-
-
   axios.post("http://localhost:7000/getUserLocation")
       .then(response => {
         console.log("dsad",response.data)
@@ -33,9 +34,18 @@ class PersonInput extends Component {
       //.then(response => {console.log("dsad",response.data)})
       .catch(err => console.log('error', err))
   }
-
-  handleSubmit = event => {
+  handleSubmit2 =event =>{
     event.preventDefault();
+    if(this.Auth.getToken()===null){
+      alert("please log in")
+      this.props.history.replace("/login");
+    }
+    else{
+      this.handleSubmit()
+    }
+  }
+  handleSubmit = event => {
+    //event.preventDefault();
     alert("name: " + this.state.firstname);
     const user = {
       firstname: "",
@@ -147,7 +157,7 @@ class PersonInput extends Component {
           />
           <br />
 
-          <button onClick={this.handleSubmit}> Edit Profile </button>
+          <button onClick={this.handleSubmit2}> Edit Profile </button>
         </MuiThemeProvider>
       </div>
     );
@@ -162,4 +172,4 @@ styles.placeCenter = {
   paddingTop: "200px"
 }
 
-export default PersonInput;
+export default withRouter(PersonInput);

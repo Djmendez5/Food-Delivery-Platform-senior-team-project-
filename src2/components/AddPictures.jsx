@@ -4,21 +4,46 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import axios from "axios";
 import "./Home.css";
 import AuthHelperMethods from './AuthHelperMethods';
-
+import Accountinfo from './Accountinfo';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    withRouter
+  } from "react-router-dom";
+    
 class AddPic extends React.Component {
+    Info = new Accountinfo();
 Auth = new AuthHelperMethods();
   state = {
       item:"",
       filename:"",
     selectedFile: null
   };
-
   fileSelectedHandler = event => {
     console.log(event.target.files[0]);
     this.setState({
       selectedFile: event.target.files[0]
     });
   };
+
+  handleSubmit2 =event =>{
+    event.preventDefault();
+    console.log(this.Info.getisRestaurant())
+    if(this.Auth.getToken()===null){
+      alert("please log in ")
+      this.props.history.replace("/login");
+    
+    }
+    else if(this.Info.getisRestaurant()==="false"){
+      alert("please log in as a Restaurant")
+      this.props.history.replace("/login");
+    }
+    else{
+      this.handleSubmit()
+    }
+  }
 
   handleSubmit = event =>{
     let pic= this.state.filename
@@ -49,7 +74,7 @@ Auth = new AuthHelperMethods();
 
   fileUploadHandler = () => {
     const fd = new FormData();
-    console.log("item", this.state.item);
+   
     var CLOUDINARY_UPLOAD_PRESET = 'k3nwpe0l';
     fd.append('file', this.state.selectedFile);
     fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
@@ -90,7 +115,7 @@ Auth = new AuthHelperMethods();
           <br/>
         <br/>
         
-        <button onClick={this.handleSubmit}> select the item</button>
+        <button onClick={this.handleSubmit2}> select the item</button>
         
         
       </div>
@@ -105,5 +130,4 @@ styles.placeCenter = {
   left: "40%",
   paddingTop: "200px"
 }
-
-export default AddPic;
+export default withRouter(AddPic);
