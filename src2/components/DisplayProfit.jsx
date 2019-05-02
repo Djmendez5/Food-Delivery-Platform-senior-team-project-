@@ -24,6 +24,7 @@ Info = new Accountinfo();
 calculation =(arr) =>{
     let length = arr.length-1;
     let total=0;
+    if(arr.length !==0){
     for(let i =0; i<arr.length;i++){
        total = total + arr[i].profit
     }
@@ -36,6 +37,13 @@ calculation =(arr) =>{
         {profit:total,start:sdate, end:fdate},
       ]
     });
+}
+else{
+    this.setState({item:  [
+        {profit:total,start:"none", end:"none"},
+      ]
+})
+}
    console.log(this.state.item)
 }
 handleSubmit2 =event =>{

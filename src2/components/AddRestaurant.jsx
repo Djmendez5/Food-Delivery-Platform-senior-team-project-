@@ -66,7 +66,7 @@ class Restaurants extends Component {
         license:this.state.license,
         name: this.state.name,
         description: this.state.description,
-        email: this.state.email,
+        email: this.Info.getEmail(),
         hours:this.state.hours,
         contact_info: this.state.contact_info,
         website: this.state.website,
@@ -92,6 +92,7 @@ class Restaurants extends Component {
           <h2>Register your Restaurant</h2>
 
           {}
+          <h4>please notice your account email will be used as the email for your restaurant</h4>
           <TextField
             type="license"
             hintText="Enter the license number"
@@ -118,14 +119,7 @@ class Restaurants extends Component {
             }}
           />
           <br />
-          <TextField
-            type="email"
-            hintText="Enter the email"
-            floatingLabelText="email"
-            onChange={e => {
-              this.setState({ email: e.target.value });
-            }}
-          />
+          
           <TextField
             type="hours"
             hintText="Enter your hours of operation"

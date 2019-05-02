@@ -37,8 +37,9 @@ class PersonInput extends Component {
     }
   }
   handleSubmit = event => {
+    console.log(this.Auth.getToken())
    
-    alert("item: " + this.state.item);
+    
     
     const user = {
         item: "",
@@ -78,8 +79,8 @@ class PersonInput extends Component {
       <div style={styles.placeCenter}> 
         <MuiThemeProvider onSubmit={this.handleSubmit}>
           <h2> Review! </h2>
-
           {}
+          
           <TextField
             type="item"
             hintText="Enter the item name"

@@ -43,7 +43,7 @@ class Menuitem extends Component {
   }
   handleSubmit = event => {
     //event.preventDefault();
-    alert("name: " + this.state.item);
+    
     const user = {
       item: "",
       description: "",
@@ -61,7 +61,7 @@ class Menuitem extends Component {
         nutrition_info: this.state.nutrition_info,
         price:parseInt(this.state.price),
         cost:parseInt(this.state.cost),
-        owner: this.state.owner,
+        owner: this.Info.getEmail(),
         picture:"https://res.cloudinary.com/fooddelivery/image/upload/v1555240848/x6vuu1a027pnkffq0x9c.jpg"
       },
       {
@@ -125,15 +125,6 @@ class Menuitem extends Component {
             floatingLabelText="cost"
             onChange={e => {
               this.setState({ cost: e.target.value });
-            }}
-          />
-          <br />
-          <TextField
-            type="owner"
-            hintText="Enter your Email"
-            floatingLabelText="Email/owner"
-            onChange={e => {
-              this.setState({ owner: e.target.value });
             }}
           />
           <br/>
