@@ -191,7 +191,7 @@ function Header() {
         <Row horizontal="center" alignSelf="center">
           <Link to="/" className="btn">
             <button className="btn" style={styles.mainButton}>
-              YeetFood
+              DKT Food
             </button>
           </Link>
         </Row>

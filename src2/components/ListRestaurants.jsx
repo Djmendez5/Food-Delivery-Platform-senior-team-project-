@@ -17,7 +17,8 @@ import Accountinfo from './Accountinfo'
 
     state ={
     city: "",
-    item:[]
+    item:[],
+    menu:[]
 };
 getCurrentCity =(arr)=>{
   let city;
@@ -51,6 +52,7 @@ getCurrentCity =(arr)=>{
 }
 handleSubmit4 =event =>{
   event.preventDefault();
+  console.log(this.Auth.getToken())
   if(this.Auth.getToken()===null){
     alert("please log in")
     this.props.history.replace("/login");
@@ -67,6 +69,26 @@ handleSubmit2 = event => {
   .then(res=>this.getCurrentCity(res.data.results))
   
 }
+handleSubmit5=ev=>{
+  console.log(this.Auth.getToken())
+  console.log(ev.currentTarget.value)
+  axios
+  .post('http://localhost:7000/getmenuinfo',{
+  email:ev.currentTarget.value
+  },
+  
+  {
+    headers: {
+      Authorization: 'Bearer ' + this.Auth.getToken()
+  }
+})
+  .then(res => {
+      console.log(res.data);
+          this.setState({menu: res.data});
+});
+};
+  
+
 handleSubmit3=event =>{
   event.preventDefault();
   if(this.Auth.getToken()===null){
@@ -77,7 +99,39 @@ handleSubmit3=event =>{
     this.handleSubmit()
   }
 }
+handleSubmit10 =ev =>{
+  
+  this.quickAdd(ev.currentTarget.name, ev.currentTarget.value,1,ev.currentTarget.id)
+}
+
+
+quickAdd=(item, maker, quantity,price)=>{
+  axios
+  .post("http://localhost:7000/addOrder", {
+    name: this.Info.getName(),
+    item: item,
+    price: parseInt(price),
+    quantity: parseInt(quantity),
+    email:this.Info.getEmail(),
+    maker:maker
+  },
+  {
+    headers: {
+      Authorization: 'Bearer ' + this.Auth.getToken()
+    }
+  }
+  )
+  .then(res => {
+     
+    console.log("order has been added")
+  });
+  
+  alert("Your total: "+ (price * quantity))
+};
+
+
 handleSubmit = event => {
+  
     //event.preventDefault();
    
     
@@ -104,6 +158,7 @@ if(this.state.item.length ===0){
 
 };
 render(){
+  console.log("menu"+this.state.menu)
     return(
         <div style={styles.placeCenter}> 
         <MuiThemeProvider onSubmit={this.handleSubmit}>
@@ -122,7 +177,11 @@ render(){
           <button onClick={this.handleSubmit3}>Show</button>
         </MuiThemeProvider>
         <ul>
-        {this.state.item.map(Restaurant=> <li key ={Restaurant.id}>{"Name:"}{Restaurant.name}{<br/>}{"Description: "}{Restaurant.description}{<br/>}{"email: "}{Restaurant.email}{<br/>}{"hours"}{Restaurant.hours}{<br/>}{"contact info: "}{Restaurant.contact_info}<br/>{"website: "}{Restaurant.website}<br/>{"address: "}{Restaurant.address}</li>)}
+        {this.state.item.map(Restaurant=> <li key ={Restaurant.id}>{"Name:"}{Restaurant.name}{<br/>}{"Description: "}{Restaurant.description}{<br/>}{"email: "}{Restaurant.email}{<br/>}{"hours"}{Restaurant.hours}{<br/>}{"contact info: "}{Restaurant.contact_info}<br/>{"website: "}{Restaurant.website}<br/>{"address: "}{Restaurant.address}<br/> 
+        <button name={Restaurant.name} value={Restaurant.email} onClick={this.handleSubmit5}>Show menu!</button>
+        </li>)}
+        {this.state.menu.map(menu=> <li key ={menu.id}>{"Name:"}{menu.item}{<br/>}{"Description: "}{menu.description}{<br/>}{"Nutritional info: "}{menu.nutrition_info}{<br/>}{"Price: $"}{menu.price}{<br/>}{"maker email: "}{menu.owner}<br/>{"Rating :"}{menu.review} <br/><img src = {menu.picture} height="200" width="200" /><br/>
+         <button name={menu.item} id={menu.price} value={menu.owner} onClick={this.handleSubmit10}>Quick order!</button></li>)}
         </ul>
         <br/>
         <button onClick={this.handleSubmit4}>Show Near Me!</button>

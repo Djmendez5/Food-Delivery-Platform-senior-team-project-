@@ -37,6 +37,34 @@ class Menuitem extends Component {
     }
   }
 
+  
+quickAdd=(item, maker, quantity,price)=>{
+  axios
+  .post("http://localhost:7000/addOrder", {
+    name: this.Info.getName(),
+    item: item,
+    price: parseInt(price),
+    quantity: parseInt(quantity),
+    email:this.Info.getEmail(),
+    maker:maker
+  },
+  {
+    headers: {
+      Authorization: 'Bearer ' + this.Auth.getToken()
+    }
+  }
+  )
+  .then(res => {
+     
+    console.log("order has been added")
+  });
+  
+  alert("Your total: "+ (price * this.state.quantity))
+};
+
+
+
+  
 
   handleSubmit = event => {
     
