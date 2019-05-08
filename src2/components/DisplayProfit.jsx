@@ -65,10 +65,6 @@ handleSubmit2 =event =>{
   }
 
 handleSubmit = event => {
-  
-    //event.preventDefault();
-
-    
     console.log(this.Auth.getToken())
     const menu = {
       owner: ""

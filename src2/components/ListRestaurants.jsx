@@ -3,6 +3,7 @@ import axios from 'axios';
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AuthHelperMethods from './AuthHelperMethods';
+import getprofit from './getprofit'
 import {
   BrowserRouter as Router,
   Route,
@@ -12,6 +13,7 @@ import {
 } from "react-router-dom";
 import Accountinfo from './Accountinfo'
  class RestaurantList extends Component{
+   Prof = new getprofit();
   Auth = new AuthHelperMethods();
   Info = new Accountinfo();
 
@@ -22,14 +24,12 @@ import Accountinfo from './Accountinfo'
 };
 getCurrentCity =(arr)=>{
   let city;
-  //console.log(arr)
   for(let i =0; i< arr.length;i++){
     if(arr[i].types[0]==="postal_code"){
       city=(arr[i].formatted_address)
     }
   }
   city = city.substring(0,city.indexOf(","));
-//console.log(city)
   axios
   .post('http://localhost:7000/getrestaurants',{
   city:city
@@ -99,6 +99,25 @@ handleSubmit3=event =>{
     this.handleSubmit()
   }
 }
+handleSubmit11 =ev=>{
+  axios.post("http://localhost:7000/addCart",{
+    item:  ev.currentTarget.name,
+    name:this.Info.getName(),
+    email:this.Info.getEmail(),
+    price:ev.currentTarget.id,
+    owner: ev.currentTarget.value
+  },
+  {
+    headers: {
+      Authorization: 'Bearer ' + this.Auth.getToken()
+    }
+  }
+  ).then(res => {
+     
+    console.log(res)
+  });
+  console.log(this.Info.getEmail(),ev.currentTarget.name, ev.currentTarget.value,ev.currentTarget.id)
+}
 handleSubmit10 =ev =>{
   
   this.quickAdd(ev.currentTarget.name, ev.currentTarget.value,1,ev.currentTarget.id)
@@ -125,7 +144,7 @@ quickAdd=(item, maker, quantity,price)=>{
      
     console.log("order has been added")
   });
-  
+  this.Prof.componentDidMount(item,maker,quantity)
   alert("Your total: "+ (price * quantity))
 };
 
@@ -181,7 +200,8 @@ render(){
         <button name={Restaurant.name} value={Restaurant.email} onClick={this.handleSubmit5}>Show menu!</button>
         </li>)}
         {this.state.menu.map(menu=> <li key ={menu.id}>{"Name:"}{menu.item}{<br/>}{"Description: "}{menu.description}{<br/>}{"Nutritional info: "}{menu.nutrition_info}{<br/>}{"Price: $"}{menu.price}{<br/>}{"maker email: "}{menu.owner}<br/>{"Rating :"}{menu.review} <br/><img src = {menu.picture} height="200" width="200" /><br/>
-         <button name={menu.item} id={menu.price} value={menu.owner} onClick={this.handleSubmit10}>Quick order!</button></li>)}
+         <button name={menu.item} id={menu.price} value={menu.owner} onClick={this.handleSubmit10}>Quick order!</button>
+         <button name={menu.item} id={menu.price} value={menu.owner} onClick={this.handleSubmit11}>Add to Cart!</button></li>)}
         </ul>
         <br/>
         <button onClick={this.handleSubmit4}>Show Near Me!</button>

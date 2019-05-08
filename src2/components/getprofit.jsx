@@ -13,6 +13,7 @@ class getreview extends Component{
     };
     
     add_profit =(arr,maker,quantity)=>{
+      console.log(arr)
         let profit = arr.info["price"] - arr.info["cost"]
         profit = profit * quantity
         

@@ -104,80 +104,94 @@ class Dropdown extends React.Component {
                   <MenuList>
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/profile" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
                         Profile
-                      </button>
+                      </Button>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={this._handleLogout} style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
                         Logout
-                      </button>
+                      </Button>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/addmenuitem" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
                         Add Menu Item
-                      </button>
+                      </Button>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/displaymenu" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
-                        Show menu
-                      </button>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Show Menu
+                      </Button>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/addrestaurant" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
-                        Add restaurant
-                      </button>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Add Restaurant
+                      </Button>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/listrestaurants" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
-                        Find restaurants
-                      </button>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Find Restaurant
+                      </Button>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/addorder" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
-                        Add Orders
-                      </button>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Add Order
+                      </Button>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                      <Link to="/cart" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Cart
+                      </Button>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/orderhistory" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
                         Order History
-                      </button>
+                      </Button>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
-                        <Link to="/review" style ={styles2.menuButton}><button className="btn" 
-                        style={styles2.menuButton}>Write a review
-                        </button>
+                        <Link to="/review" style ={styles2.menuButton}>
+                        <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                          Write a Review
+                        </Button>
                         </Link>
-                    </MenuItem>
-                    
-                    <MenuItem onClick={this.handleClose}>
-                      <Link to="/profit" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
-                        Show your profit
-                      </button>
-                      </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/addpic" style={styles2.menuButton}>
-                      <button className="btn" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
                         Add Picture
-                      </button>
+                      </Button>
                       </Link>
                     </MenuItem>
-                   
+                    <MenuItem onClick={this.handleClose}>
+                      <Link to="/getpic" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Get Picture
+                      </Button>
+                      </Link>
+                    </MenuItem>
+    
+                    <MenuItem onClick={this.handleClose}>
+                      <Link to="/profit" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Show Profit
+                      </Button>
+                      </Link>
+                    </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -193,4 +207,3 @@ Dropdown.propTypes = {
   classes: PropTypes.object.isRequired
 };
 export default withRouter(Dropdown);
-//export default Dropdown;

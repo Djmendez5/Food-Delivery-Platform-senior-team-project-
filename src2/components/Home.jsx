@@ -32,6 +32,7 @@ import HomeHelper from "./HomeHelper";
 import AddPictures from "./AddPictures";
 import GetPictures from "./GetPictures";
 import DisplayProfit from './DisplayProfit';
+import Cart from './Cart';
 function App() {
  
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/getpic" component={GetPIC} />
         <Route path="/review" component={Review} />
         <Route path='/profit' component ={DisplayProfit}/>
+        <Route path='/cart' component ={Cart}/>
       </div>
     </Router>
   );
@@ -73,23 +75,11 @@ function Home() {
   console.log("Hello");
   return (
     <MuiThemeProvider>
-      <Row horizontal="center">
-        <h2 className="food-Image" style={styles.welcome}>
-          Find Restaurant 
-          <TextField
-            type="location"
-            // hintText="Address"
-            // floatingLabelText="Find Restaurant"
-            // onChange={(event, newValue) =>
-            //   this.setState({ username: newValue })
-            // }
-
-            variant="outlined"
-          />
-        </h2>
-      </Row>
-    </MuiThemeProvider>
-  );
+    <Row horizontal="center" className="food-Image" style={styles.welcome}>
+      <h2> We deliver straight to your door </h2>
+    </Row>
+  </MuiThemeProvider>
+);
 }
 
 function Signin() {
@@ -123,7 +113,8 @@ function Topics({ match }) {
 const styles = {};
 
 styles.mainButton = {
-  // position: "absolute",
+  border: "transparent",
+  textDecoration: "none",
   fontSize: "50px",
   color: "red",
   attachment: "fixed",
@@ -182,6 +173,7 @@ styles.listrestaurantsButton = {
   fontSize: "20px",
   color: "green"
 };
+
 function Header() {
   
   return (
