@@ -116,7 +116,7 @@ render(){
         {this.state.item.map(item=> <li key ={item.id}>{"Item name: "}{item.item}{<br/>} {"price: "}{item.price}{<br/>} {" owner:  "}{item.owner}
         <button name={item.item} id={item.price} value={item.owner} onClick={this.handleSubmit5}>delete</button>
         </li>)}
-        <button onClick={this.handleSubmit6}>Checkout!(not implemented)</button>
+        <button onClick={this.handleSubmit6}>Checkout!</button>
         </ul>
         </div>
     )
