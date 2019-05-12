@@ -20,7 +20,7 @@ import {
     item:[]
 };
 handleSubmit4 =ev =>{
-  
+    //when thhe user is shown the email they can add a quick order
   this.quickAdd(ev.currentTarget.name, ev.currentTarget.value,1,ev.currentTarget.id)
 
   console.log(ev.currentTarget.name, ",",ev.currentTarget.id,",",ev.currentTarget.value)
@@ -50,16 +50,6 @@ quickAdd=(item, maker, quantity,price)=>{
 };
 
 
-/*handleSubmit2 =event =>{
-  event.preventDefault();
-  if(this.Auth.getToken()===null){
-    alert("please log in")
-    this.props.history.replace("/login");
-  }
-  else{
-    this.handleSubmit()
-  }
-}*/
 
 handleSubmit = event => {
     console.log(this.Auth.getToken())

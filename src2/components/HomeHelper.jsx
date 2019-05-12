@@ -52,6 +52,7 @@ class Dropdown extends React.Component {
 
   /* Add the following into _handleLogout*/
   _handleLogout = () => {
+    //delete token and local storage user info 
     this.Auth.logout();
     this.Info.logout();
 
@@ -66,9 +67,7 @@ class Dropdown extends React.Component {
   };
 
   handleClose = event => {
-    // if (this.anchorEl.contains(event.target)) {
-    //   return;
-    // }
+    
     this.setState({ open: false });
   };
 

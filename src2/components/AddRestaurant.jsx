@@ -79,9 +79,7 @@ class Restaurants extends Component {
         }
       })
       .then(res => {
-        
-        
-        //console.log(res.data);
+      
       });
   };
 

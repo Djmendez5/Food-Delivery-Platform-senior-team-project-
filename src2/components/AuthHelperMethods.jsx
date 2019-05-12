@@ -19,7 +19,7 @@ export default class AuthHelperMethods {
             this.setToken(res.data.token) 
             return Promise.resolve(res);
         })
-        //this.props.history.push("/profile");
+        
     console.log(this.getToken())
     }
 

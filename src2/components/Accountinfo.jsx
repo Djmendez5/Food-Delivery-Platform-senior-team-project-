@@ -4,7 +4,7 @@ export default class Accountinfo{
    
     
     loggedin= (username) =>{
-       
+       //store all the variables into local storage
     axios.post('http://localhost:7000/Accountinfo',{
         username:username
     }).then(res => {
@@ -21,6 +21,7 @@ export default class Accountinfo{
        
     }); 
 }
+//set local storage and set up getters
 setName =(idName) =>{
     localStorage.setItem('id_name',idName)
 }
@@ -58,6 +59,7 @@ getisRestaurant=()=>{
     return localStorage.getItem('id_isRestaurant')
 }
 
+//delete the tokens upon logout
 logout = () => {
     localStorage.removeItem('id_name')
     localStorage.removeItem('id_email');

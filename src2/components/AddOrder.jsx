@@ -39,6 +39,7 @@ class Menuitem extends Component {
 
   
 quickAdd=(item, maker, quantity,price)=>{
+
   axios
   .post("http://localhost:7000/addOrder", {
     name: this.Info.getName(),
@@ -166,5 +167,5 @@ styles.placeCenter = {
   paddingTop: "200px"
 }
 
-//export default Menuitem;
+
 export default withRouter(Menuitem);

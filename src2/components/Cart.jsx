@@ -14,7 +14,7 @@ import {
     withRouter
   } from "react-router-dom";
  class Cart extends Component{
-     Prof = new getprofit();
+   Prof = new getprofit();
 Info = new Accountinfo();
   Auth = new AuthHelperMethods();
 
@@ -26,7 +26,7 @@ Info = new Accountinfo();
 };
 
 componentDidMount(){
-    //event.preventDefault();
+    //make sure the token is legit 
     if(this.Auth.getToken()===null){
       alert("please log in ")
       this.props.history.replace("/login");
@@ -38,18 +38,24 @@ componentDidMount(){
   }
 
   handleSubmit5 =ev =>{
+    //if they decided to delete an item from the cart it will delete it here
+
       let itemname = String(ev.currentTarget.name);
 
     axios.delete('http://localhost:7000/removeCartItem',{
+      //unlike POST and GET, DELETE requires that format to send info
         data:{item: itemname }
         
     })
   .then(res => {
+    //will alert the user with "deleted 'item'"
 alert(res.data)
   })
   }
   handleSubmit6 =ev =>{
       let total =0;
+      //if checked out add every item in the list to an order, add the
+      //prices and display them 
       for(let i=0;i<this.state.item.length;i++){
           this.quickAdd(this.state.item[i].item, this.state.item[i].owner,1,this.state.item[i].price)
           total =total + this.state.item[i].price
@@ -57,9 +63,11 @@ alert(res.data)
       console.log(total)
 console.log(this.state.item)  
 };
+//makes an order for every item including sending an email to each chef
 quickAdd=(item, maker, quantity,price)=>{
     axios
     .post("http://localhost:7000/addOrder", {
+      //get the name and email from the local storage 
       name: this.Info.getName(),
       item: item,
       price: parseInt(price),

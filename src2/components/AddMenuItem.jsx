@@ -24,7 +24,7 @@ class Menuitem extends Component {
     price: "",
     email: ""
   };
-
+//checking is logged in my making sure the token is legit
   handleSubmit2 =event =>{
     event.preventDefault();
     console.log(this.Info.getisRestaurant())
@@ -42,7 +42,6 @@ class Menuitem extends Component {
     }
   }
   handleSubmit = event => {
-    //event.preventDefault();
     
     const user = {
       item: "",
@@ -53,7 +52,7 @@ class Menuitem extends Component {
     };
 
     console.log(user);
-
+//send the axios request. 
     axios
       .post("http://localhost:7000/additem", {
         item: this.state.item,
@@ -66,19 +65,20 @@ class Menuitem extends Component {
       },
       {
         headers: {
+          //you put the token as a header 'Bearer' is important
           Authorization: 'Bearer ' + this.Auth.getToken()
         }
       }
       )
       
       .then(res => {
-          //console.log("asdsadsa")
-        // name: res.data;
+          //nothing important here
         console.log(res.data);
       });
   };
 
   render() {
+    //create the simple form 
     return (
       <div style={styles.placeCenter}> 
         <MuiThemeProvider onSubmit={this.handleSubmit}>
@@ -128,12 +128,14 @@ class Menuitem extends Component {
             }}
           />
           <br/>
+    
           <button onClick={this.handleSubmit2}>Add</button>
         </MuiThemeProvider>
       </div>
     );
   }
 }
+//when the button is clicked above it will call handlesubmit 2. 
 
 const styles = {};
 
