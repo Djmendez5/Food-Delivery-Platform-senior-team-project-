@@ -23,6 +23,8 @@ import Accountinfo from './Accountinfo'
     menu:[]
 };
 getCurrentCity =(arr)=>{
+
+  //get the user's city 
   let city;
   for(let i =0; i< arr.length;i++){
     if(arr[i].types[0]==="postal_code"){
@@ -30,6 +32,7 @@ getCurrentCity =(arr)=>{
     }
   }
   city = city.substring(0,city.indexOf(","));
+  //get all the restaurants in that city 
   axios
   .post('http://localhost:7000/getrestaurants',{
   city:city
@@ -42,14 +45,14 @@ getCurrentCity =(arr)=>{
     }
   })
   .then(res => {
-   
-      console.log(res.data);
+  
           this.setState({item: res.data});
 
 });
 
 
 }
+//check if they are logged in 
 handleSubmit4 =event =>{
   event.preventDefault();
   console.log(this.Auth.getToken())
@@ -62,7 +65,7 @@ handleSubmit4 =event =>{
   }
 }
 handleSubmit2 = event => {
- 
+ //get city thing from the backend
 
   const location=JSON.parse(localStorage.getItem('location'))
   axios.post('http://localhost:7000/getAddress', location)
@@ -70,6 +73,8 @@ handleSubmit2 = event => {
   
 }
 handleSubmit5=ev=>{
+  //if a city is entered then simply look for the restaurants
+  //in that city
   console.log(this.Auth.getToken())
   console.log(ev.currentTarget.value)
   axios
@@ -151,8 +156,6 @@ quickAdd=(item, maker, quantity,price)=>{
 
 handleSubmit = event => {
   
-    //event.preventDefault();
-   
     
     axios
     .post('http://localhost:7000/getrestaurants',{

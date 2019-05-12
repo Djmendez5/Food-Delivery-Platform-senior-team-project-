@@ -74,7 +74,7 @@ class Dropdown extends React.Component {
   render() {
     const { open } = this.state;
     const { classes } = this.props;
-
+//drop down meny for all our pages with their path 
     return (
       <div>
         <Button
@@ -120,13 +120,7 @@ class Dropdown extends React.Component {
                       </Button>
                       </Link>
                     </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                      <Link to="/displaymenu" style={styles2.menuButton}>
-                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
-                        Show Menu
-                      </Button>
-                      </Link>
-                    </MenuItem>
+                    
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/addrestaurant" style={styles2.menuButton}>
                       <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
@@ -176,13 +170,7 @@ class Dropdown extends React.Component {
                       </Button>
                       </Link>
                     </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                      <Link to="/getpic" style={styles2.menuButton}>
-                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
-                        Get Picture
-                      </Button>
-                      </Link>
-                    </MenuItem>
+                  
     
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/profit" style={styles2.menuButton}>

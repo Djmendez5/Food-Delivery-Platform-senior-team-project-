@@ -9,13 +9,14 @@ import {
   withRouter
 } from "react-router-dom";
 export default class AuthHelperMethods {
-
+//checks the info used by the user with the bcend
     login = (username, password) => { 
         axios.post('http://localhost:7000/login', {
         username:username,
         password:password
     })
         .then(res => {
+            //will store teh token in local storage
             this.setToken(res.data.token) 
             return Promise.resolve(res);
         })

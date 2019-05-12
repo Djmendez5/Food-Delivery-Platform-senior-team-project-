@@ -22,6 +22,7 @@ Info = new Accountinfo();
     profits:[]
 
 };
+//add the profits
 calculation =(arr) =>{
     let length = arr.length-1;
     let total=0;
@@ -30,7 +31,7 @@ calculation =(arr) =>{
        total = total + arr[i].profit
     }
     
-   
+   //get the starting and final date the profit data will show 
     let sdate =arr[0].createdAt[0] + arr[0].createdAt[1] +arr[0].createdAt[2]+arr[0].createdAt[3]+arr[0].createdAt[4]+arr[0].createdAt[5]+arr[0].createdAt[6]+arr[0].createdAt[7]+arr[0].createdAt[8]+arr[0].createdAt[9]
     let fdate =arr[length].createdAt[0] + arr[length].createdAt[1] +arr[length].createdAt[2]+arr[length].createdAt[3]+arr[length].createdAt[4]+arr[length].createdAt[5]+arr[length].createdAt[6]+arr[length].createdAt[7]+arr[length].createdAt[8]+arr[length].createdAt[9]
     
@@ -40,6 +41,7 @@ calculation =(arr) =>{
     });
 }
 else{
+  //if no orders have been placed then hardcore it to none
     this.setState({item:  [
         {profit:total,start:"none", end:"none"},
       ]
@@ -69,6 +71,7 @@ handleSubmit = event => {
     const menu = {
       owner: ""
     };
+    //get the list of orders under the chef logged in 
     axios
     .post('http://localhost:7000/getprofits',{
     email:this.Info.getEmail()
@@ -89,7 +92,6 @@ handleSubmit = event => {
 };
 render(){
     return(
-        console.log("S" + this.state.item),
         <div style={styles.placeCenter}> 
         <MuiThemeProvider onSubmit={this.handleSubmit}>
           <h2>Show Profit!</h2>

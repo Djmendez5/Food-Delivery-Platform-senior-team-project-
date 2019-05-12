@@ -34,7 +34,7 @@ import GetPictures from "./GetPictures";
 import DisplayProfit from './DisplayProfit';
 import Cart from './Cart';
 function App() {
- 
+ //bunch of paths for all our pages
   return (
     <Router>
       <div>
