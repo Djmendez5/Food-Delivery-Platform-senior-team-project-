@@ -4,16 +4,23 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import axios from "axios";
 import "./Home.css";
 import AuthHelperMethods from './AuthHelperMethods';
-
+import Accountinfo from './Accountinfo';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    withRouter
+  } from "react-router-dom";
+    
 class AddPic extends React.Component {
-  Auth = new AuthHelperMethods();
+    Info = new Accountinfo();
+Auth = new AuthHelperMethods();
   state = {
-    selectedFile: null,
-    item:"",
-    filename:"",
-    listPictures: []
+      item:"",
+      filename:"",
+    selectedFile: null
   };
-
   fileSelectedHandler = event => {
     console.log(event.target.files[0]);
     this.setState({
@@ -21,26 +28,22 @@ class AddPic extends React.Component {
     });
   };
 
-  fileUploadHandler = () => {
-    const fd = new FormData();
-    var CLOUDINARY_UPLOAD_PRESET = 'k3nwpe0l';
-    fd.append('file', this.state.selectedFile);
-    fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    axios.post("https://api.cloudinary.com/v1_1/fooddelivery/image/upload", fd, {
-      onUploadProgress: progressEvent => {
-        console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%');
-      }
-    })
-        .then(res => {
-            console.log(res);
-            this.state.listPictures.push(res.data.secure_url);
-            localStorage.setItem('localPictures', res.data.secure_url);
-            console.log(this.state.listPictures);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-  };
+  handleSubmit2 =event =>{
+    event.preventDefault();
+    console.log(this.Info.getisRestaurant())
+    if(this.Auth.getToken()===null){
+      alert("please log in ")
+      this.props.history.replace("/login");
+    
+    }
+    else if(this.Info.getisRestaurant()==="false"){
+      alert("please log in as a Restaurant")
+      this.props.history.replace("/login");
+    }
+    else{
+      this.handleSubmit()
+    }
+  }
 
   handleSubmit = event =>{
     let pic= this.state.filename
@@ -65,8 +68,29 @@ class AddPic extends React.Component {
       
   };
 
+
+
+  
+
+  fileUploadHandler = () => {
+    const fd = new FormData();
+   
+    var CLOUDINARY_UPLOAD_PRESET = 'k3nwpe0l';
+    fd.append('file', this.state.selectedFile);
+    fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    axios.post("https://api.cloudinary.com/v1_1/fooddelivery/image/upload", fd)
+        .then(res => {
+            this.setState({filename: res.data.public_id });
+            
+        })
+        .catch(err => {
+            console.log(err);
+        });
+  };
+
   render() {
     return (
+     
       <div style={styles.placeCenter}> 
       <input type="file" onChange={this.fileSelectedHandler} />
         <br/>
@@ -91,19 +115,19 @@ class AddPic extends React.Component {
           <br/>
         <br/>
         
-        <button onClick={this.handleSubmit}> select the item</button>
+        <button onClick={this.handleSubmit2}> select the item</button>
         
         
       </div>
+      
     );
   }
 }
-
 const styles = {};
 
 styles.placeCenter = {
   position: "absolute",
   left: "40%",
-  paddingTop: "100px"
+  paddingTop: "200px"
 }
-export default AddPic;
+export default withRouter(AddPic);

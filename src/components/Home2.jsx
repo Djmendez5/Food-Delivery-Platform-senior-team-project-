@@ -21,6 +21,7 @@ import ListRestaurants from "./ListRestaurants";
 import AddOrder from "./AddOrder";
 import OrderHistory from "./OrderHistory";
 import Review from "./Review";
+
 //  import Chip from '@material-ui/core/Chip';
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
@@ -32,10 +33,9 @@ import HomeHelper from "./HomeHelper";
 import AddPictures from "./AddPictures";
 import GetPictures from "./GetPictures";
 import DisplayProfit from './DisplayProfit';
-import Server from "./server2";
-import Cart from './Cart';
+
 function App() {
- //bunch of paths for all our pages
+ console.log("asdasdasdadad");
   return (
     <Router>
       <div>
@@ -51,20 +51,10 @@ function App() {
         <Route path="/addorder" component={AddOrder} />
         <Route path="/orderhistory" component={OrderHistory} />
         <Route path="/addpic" component={AddPIC} />
-        <Route path="/getpic" component={GetPIC} />
         <Route path="/review" component={Review} />
-        <Route path='/profit' component ={DisplayProfit}/>
-        <Route path='/cart' component ={Cart}/>
-        <Route path='/chat' component={GetChat} />
       </div>
     </Router>
   );
-}
-function GetChat() {
-  return <Server />;
-}
-function GetPIC() {
-  return <GetPictures />;
 }
 
 function AddPIC() {
@@ -79,11 +69,23 @@ function Home() {
   console.log("Hello");
   return (
     <MuiThemeProvider>
-    <Row horizontal="center" className="food-Image" style={styles.welcome}>
-      <h2> We deliver straight to your door </h2>
-    </Row>
-  </MuiThemeProvider>
-);
+      <Row horizontal="center">
+        <h2 className="food-Image" style={styles.welcome}>
+          Find Restaurant 
+          <TextField
+            type="location"
+            // hintText="Address"
+            // floatingLabelText="Find Restaurant"
+            // onChange={(event, newValue) =>
+            //   this.setState({ username: newValue })
+            // }
+
+            variant="outlined"
+          />
+        </h2>
+      </Row>
+    </MuiThemeProvider>
+  );
 }
 
 function Signin() {
@@ -117,8 +119,7 @@ function Topics({ match }) {
 const styles = {};
 
 styles.mainButton = {
-  border: "transparent",
-  textDecoration: "none",
+  // position: "absolute",
   fontSize: "50px",
   color: "red",
   attachment: "fixed",
@@ -177,7 +178,6 @@ styles.listrestaurantsButton = {
   fontSize: "20px",
   color: "green"
 };
-
 function Header() {
   
   return (
@@ -187,7 +187,7 @@ function Header() {
         <Row horizontal="center" alignSelf="center">
           <Link to="/" className="btn">
             <button className="btn" style={styles.mainButton}>
-              DKT Food
+              YeetFood
             </button>
           </Link>
         </Row>
@@ -197,11 +197,10 @@ function Header() {
             Login
           </button>
         </Link>
-        <Link to="/signup" style={styles.signupButton}>
-          <button className="btn" style={styles.signupButton}>
-            SignUp
-          </button>
-        </Link>
+        
+        {/* </Row> */}
+
+        {}
       </Column>
     </ul>
   );

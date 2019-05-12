@@ -4,9 +4,19 @@ import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import "./Home.css";
 import AuthHelperMethods from './AuthHelperMethods';
+import Accountinfo from './Accountinfo';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 class Restaurants extends Component {
+  Info = new Accountinfo();
   Auth = new AuthHelperMethods();
   state = {
+    license:"",
     name: "",
     description: "",
     email: "",
@@ -16,11 +26,30 @@ class Restaurants extends Component {
     address:"",
     city:""
   };
-  
-  handleSubmit = event => {
+  handleSubmit2 =event =>{
     event.preventDefault();
-    alert("name: " + this.state.name);
+    if(this.Auth.getToken()===null){
+      alert("please log in")
+      this.props.history.replace("/login");
+    }
+    else{
+      this.handleSubmit()
+    }
+  }
+  handleSubmit = event => {
+    axios.put("http://localhost:7000/isRestaurant",{
+      username: this.Info.getUsername()
+
+    },
+    {
+      headers: {
+        Authorization: 'Bearer ' + this.Auth.getToken()
+      }
+    })
+    
+   
     const rest = {
+      license:"",
         name: "",
         description: "",
         email: "",
@@ -30,14 +59,14 @@ class Restaurants extends Component {
         address:"",
         city:""
     };
-
-    console.log(rest);
+    
 
     axios
       .post("http://localhost:7000/addRestaurant", {
+        license:this.state.license,
         name: this.state.name,
         description: this.state.description,
-        email: this.state.email,
+        email: this.Info.getEmail(),
         hours:this.state.hours,
         contact_info: this.state.contact_info,
         website: this.state.website,
@@ -50,8 +79,7 @@ class Restaurants extends Component {
         }
       })
       .then(res => {
-        // name: res.data;
-        console.log(res.data);
+      
       });
   };
 
@@ -62,6 +90,15 @@ class Restaurants extends Component {
           <h2>Register your Restaurant</h2>
 
           {}
+          <h4>please notice your account email will be used as the email for your restaurant</h4>
+          <TextField
+            type="license"
+            hintText="Enter the license number"
+            floatingLabelText="license"
+            onChange={e => {
+              this.setState({license: e.target.value });
+            }}
+          />
           <TextField
             type="name"
             hintText="Enter the name"
@@ -80,14 +117,7 @@ class Restaurants extends Component {
             }}
           />
           <br />
-          <TextField
-            type="email"
-            hintText="Enter the email"
-            floatingLabelText="email"
-            onChange={e => {
-              this.setState({ email: e.target.value });
-            }}
-          />
+          
           <TextField
             type="hours"
             hintText="Enter your hours of operation"
@@ -133,7 +163,7 @@ class Restaurants extends Component {
           />
           <br />
 
-          <button onClick={this.handleSubmit}>Sign Up</button>
+          <button onClick={this.handleSubmit2}>Sign Up</button>
         </MuiThemeProvider>
       </div>
     );
@@ -145,7 +175,7 @@ const styles = {};
 styles.placeCenter = {
   position: "absolute",
   left: "40%",
-  paddingTop: "100px"
+  paddingTop: "200px"
 }
 
-export default Restaurants;
+export default withRouter(Restaurants);

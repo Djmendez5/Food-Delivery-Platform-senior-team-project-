@@ -6,7 +6,14 @@ import AuthHelperMethods from './AuthHelperMethods';
 import "./Home.css";
 import Accountinfo from "./Accountinfo";
 import getreview from './getreview'
-  
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
+
 class PersonInput extends Component {
   Auth = new AuthHelperMethods();
   Info = new Accountinfo();
@@ -18,16 +25,21 @@ class PersonInput extends Component {
     price:"",
     owner: ""
   };
-/*
-  componentDidMount() {
-  axios.post("http://localhost:7000/getUserLocation")
-      .then(response => this.setState({location:response.data}))
-      .catch(err => console.log('error', err))
-  }*/
 
-  handleSubmit = event => {
+  handleSubmit2 =event =>{
     event.preventDefault();
-    alert("item: " + this.state.item);
+    if(this.Auth.getToken()===null){
+      alert("please log in")
+      this.props.history.replace("/login");
+    }
+    else{
+      this.handleSubmit()
+    }
+  }
+  handleSubmit = event => {
+    console.log(this.Auth.getToken())
+   
+    
     
     const user = {
         item: "",
@@ -38,7 +50,7 @@ class PersonInput extends Component {
     };
     this.Rev.componentDidMount(this.state.item)
 
-    console.log(this.Auth.getToken());
+    
 
     axios
       .post("http://localhost:7000/review", {
@@ -62,13 +74,13 @@ class PersonInput extends Component {
 
 
   render() {
-  console.log(this.state.location);
+ // console.log(this.state.location);
     return (
       <div style={styles.placeCenter}> 
         <MuiThemeProvider onSubmit={this.handleSubmit}>
           <h2> Review! </h2>
-
           {}
+          
           <TextField
             type="item"
             hintText="Enter the item name"
@@ -88,7 +100,7 @@ class PersonInput extends Component {
           />
           <br />
 
-          <button onClick={this.handleSubmit}> Submit rating</button>
+          <button onClick={this.handleSubmit2}> Submit rating</button>
         </MuiThemeProvider>
       </div>
     );
@@ -100,7 +112,7 @@ const styles = {};
 styles.placeCenter = {
   position: "absolute",
   left: "40%",
-  paddingTop: "100px"
+  paddingTop: "200px"
 }
 
-export default PersonInput;
+export default withRouter(PersonInput);

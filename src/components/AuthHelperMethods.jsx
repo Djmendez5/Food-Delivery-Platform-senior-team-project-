@@ -1,16 +1,26 @@
 import decode from 'jwt-decode';
 import axios from 'axios';
+import "./Home.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 export default class AuthHelperMethods {
-
+//checks the info used by the user with the bcend
     login = (username, password) => { 
         axios.post('http://localhost:7000/login', {
         username:username,
         password:password
     })
         .then(res => {
+            //will store teh token in local storage
             this.setToken(res.data.token) 
             return Promise.resolve(res);
         })
+        
     console.log(this.getToken())
     }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -43,7 +44,6 @@ styles2.button = {
 styles2.menuButton = {
   fontWeight: "bold",
   border: "transparent",
-  textDecoration: "none",
 };
 
 class Dropdown extends React.Component {
@@ -52,9 +52,11 @@ class Dropdown extends React.Component {
 
   /* Add the following into _handleLogout*/
   _handleLogout = () => {
+    //delete token and local storage user info 
     this.Auth.logout();
     this.Info.logout();
-    //this.props.history.replace('/login');
+
+    this.props.history.push('/login');
   };
   state = {
     open: false
@@ -65,16 +67,14 @@ class Dropdown extends React.Component {
   };
 
   handleClose = event => {
-    // if (this.anchorEl.contains(event.target)) {
-    //   return;
-    // }
+    
     this.setState({ open: false });
   };
 
   render() {
     const { open } = this.state;
     const { classes } = this.props;
-
+//drop down meny for all our pages with their path 
     return (
       <div>
         <Button
@@ -120,13 +120,7 @@ class Dropdown extends React.Component {
                       </Button>
                       </Link>
                     </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                      <Link to="/displaymenu" style={styles2.menuButton}>
-                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
-                        Show Menu
-                      </Button>
-                      </Link>
-                    </MenuItem>
+                    
                     <MenuItem onClick={this.handleClose}>
                       <Link to="/addrestaurant" style={styles2.menuButton}>
                       <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
@@ -145,6 +139,13 @@ class Dropdown extends React.Component {
                       <Link to="/addorder" style={styles2.menuButton}>
                       <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
                         Add Order
+                      </Button>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                      <Link to="/cart" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Cart
                       </Button>
                       </Link>
                     </MenuItem>
@@ -170,20 +171,6 @@ class Dropdown extends React.Component {
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
-                      <Link to="/getpic" style={styles2.menuButton}>
-                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
-                        Get Picture
-                      </Button>
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                      <Link to="/chat" style={styles2.menuButton}>
-                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
-                        Chat
-                      </Button>
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
                       <Link to="/profit" style={styles2.menuButton}>
                       <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
                         Show Profit
@@ -191,6 +178,13 @@ class Dropdown extends React.Component {
                       </Link>
                     </MenuItem>
                   </MenuList>
+                  <MenuItem onClick={this.handleClose}>
+                      <Link to="/chat" style={styles2.menuButton}>
+                      <Button color="secondary" variant="contained" size="medium" className=""  style={styles2.menuButton}>
+                        Chat
+                      </Button>
+                      </Link>
+                    </MenuItem>
                 </ClickAwayListener>
               </Paper>
             </Grow>
@@ -204,5 +198,4 @@ class Dropdown extends React.Component {
 Dropdown.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
-export default Dropdown;
+export default withRouter(Dropdown);

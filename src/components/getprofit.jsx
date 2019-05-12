@@ -7,24 +7,20 @@ import Accountinfo from './Accountinfo';
 class getreview extends Component{
     Auth = new AuthHelperMethods();
     state = {
+        maker:"",
       item: "",
-     reviews:[]
+     profit:[]
     };
     
-    update_review =(arr)=>{
-      let arr2=[0];
-      for (var i = 0; i < arr.length; i++) {
-        arr2.push(arr[i].customer_review)
-    }
-    let average=0; 
-       average = arr2.reduce((previous, current) => current += previous);
-       average = average/arr.length;
-       average = average.toFixed(1);
-      //console.log(average);
-    
-    axios.put('http://localhost:7000/updateRating',{
+    add_profit =(arr,maker,quantity)=>{
+      console.log(arr)
+        let profit = arr.info["price"] - arr.info["cost"]
+        profit = profit * quantity
+        
+    axios.post('http://localhost:7000/profit',{
     item:this.state.item,
-    review:average
+    email:maker,
+    profit: profit
     },
     {
       headers: {
@@ -34,11 +30,13 @@ class getreview extends Component{
     )
     }  
 
-  componentDidMount = (item) =>{   
-this.state.item = item;
+  componentDidMount = (item,maker,quantity) =>{ 
+      this.state.maker =maker;  
+        this.state.item = item;
   
+      
       axios
-      .post('http://localhost:7000/getreview',{
+      .post('http://localhost:7000/getCostPrice',{
       item:this.state.item,
       },
       {
@@ -47,9 +45,9 @@ this.state.item = item;
         }
       })
       .then(res => {
-       
-          this.update_review(res.data);
-             
+        
+          this.add_profit(res.data,maker,quantity);
+            
   
   });
  
