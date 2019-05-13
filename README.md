@@ -1,7 +1,7 @@
 # Food Delivery Platform
 
 ## Brief Description
-	The Food Delivery Platform is a web application that carries out food delivery services, similar to apps such as UberEats, DoorDash, Grubhub, etc. The key difference from this application to existing apps is that the Food Delivery Platform is focused on both the consumer and the producer. If people from our local communities have a product they would like to sell, using this app would be a great gateway to make money for their business. This application wants to cater our services to local businesses in addition to established and well known restaurants. Another key feature that sets our app apart from theirs is the option to rate and review a single food item, rather than rating the business or restaurant altogether. 
+The Food Delivery Platform is a web application that carries out food delivery services, similar to apps such as UberEats, DoorDash, Grubhub, etc. The key difference from this application to existing apps is that the Food Delivery Platform is focused on both the consumer and the producer. If people from our local communities have a product they would like to sell, using this app would be a great gateway to make money for their business. This application wants to cater our services to local businesses in addition to established and well known restaurants. Another key feature that sets our app apart from theirs is the option to rate and review a single food item, rather than rating the business or restaurant altogether. 
 
 ## Build Instructions
   1. Download Node.js and NPM (https://www.npmjs.com/get-npm)
