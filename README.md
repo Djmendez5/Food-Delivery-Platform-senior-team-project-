@@ -47,7 +47,9 @@ The Food Delivery Platform is a web application that carries out food delivery s
     $ npm install <package name>
     
     
-   7. Run with npm start while in the project file.
+   7. While in the project file run:
+   
+    $ npm start  
    
    
    8. Once that is all done run npm start on the react app, node index.js on the Node folder & you should be all set!
